@@ -29,6 +29,7 @@ When creating the custom slot values, substitute in your scenes, light, and grou
 You need to set up the local Sinatra server. Place ````app.rb````, ````lights.rb````, ````alexa_objects.rb````, and ````fix_schedule_syntax.rb```` in the same directory. Open up a terminal in that directory and type
 
 ````gem install hue_switch````
+
 ````ruby app.rb````
 
 to start the server on port 4567.
