@@ -1,0 +1,65 @@
+{
+  "intents": [
+    {
+      "intent": "ControlLights",
+      "slots": [
+        {
+          "name": "Lights",
+          "type": "LIGHTS"
+        },
+        {
+          "name": "Brightness",
+          "type": "LEVEL"
+        },
+        {
+          "name": "Saturation",
+          "type": "LEVEL"
+        },
+        {
+          "name": "Start",
+          "type": "AMAZON.LITERAL"
+        },
+        {
+          "name": "Stop",
+          "type": "AMAZON.LITERAL"
+        },
+        {
+          "name": "State",
+          "type": "STATE"
+        },
+        {
+          "name": "SaveScene",
+          "type": "AMAZON.LITERAL"
+        },
+        {
+          "name": "String",
+          "type": "AMAZON.LITERAL"
+        },
+        {
+          "name": "Color",
+          "type": "COLOR"
+        },
+        {
+          "name": "Schedule",
+          "type": "SCHEDULE"
+        },
+        {
+          "name": "Time",
+          "type": "AMAZON.TIME"
+        },
+         {
+          "name": "Modifier",
+          "type": "AMAZON.LITERAL"
+        },
+        {
+          "name": "Scene",
+          "type": "SCENE"
+        },
+        {
+          "name": "EndSession",
+          "type": "AMAZON.LITERAL"
+        }
+      ] 
+    }
+  ]
+}

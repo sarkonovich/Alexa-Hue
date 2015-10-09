@@ -1,0 +1,62 @@
+ControlLights turn the {Lights} {State}
+ControlLights turn {State} the {Lights}
+ControlLights set {Scene} scene
+ControlLights set scene {Scene}
+ControlLights set the scene {Scene}
+
+ControlLights turn the {Lights} {Color}
+ControlLights turn the {Lights} to {Color}
+ControlLights turn the {Lights} to the {Color}
+ControlLights change the {Lights} to {Color}
+ControlLights change the {Lights} to the {Color}
+ControlLights set the {Lights} to {Color}
+ControlLights set the {Lights} to the {Color}
+
+ControlLights turn {State} the {Lights} in {Schedule}
+ControlLights turn the {Lights} {State} in {Schedule}
+ControlLights turn the {Lights} {Color} in {Schedule}
+ControlLights turn the {Lights} to {Color} in {Schedule}
+ControlLights turn the {Lights} to the {Color} in {Schedule}
+ControlLights change the {Lights} to {Color} in {Schedule}
+ControlLights change the {Lights} to the {Color} in {Schedule}
+ControlLights set the {Lights} to {Color} in {Schedule}
+ControlLights set the {Lights} to the {Color} in {Schedule}
+
+ControlLights turn {State} the {Lights} at {Time}
+ControlLights turn the {Lights} {State} at {Time}
+ControlLights turn the {Lights} {Color} at {Time}
+ControlLights turn the {Lights} to {Color} at {Time}
+ControlLights turn the {Lights} to the {Color} at {Time}
+ControlLights change the {Lights} to {Color} at {Time}
+ControlLights change the {Lights} to the {Color} at {Time}
+ControlLights set the {Lights} to {Color} at {Time}
+ControlLights set the {Lights} to the {Color} at {Time}
+
+ControlLights {Lights} brightness {Brightness} 
+ControlLights set the {Lights} to brightness {Brightness}
+ControlLights raise the {Lights} to brightness {Brightness}
+ControlLights dim the {Lights} to brightness {Brightness}
+ControlLights {Lights} saturation {Saturation} 
+ControlLights set the {Lights} to saturation {Saturation}
+
+
+ControlLights set the {Lights} to the color {Color} and saturation {Saturation}
+ControlLights set the {Lights} to the color {Color} and brightness {Brightness} 
+ControlLights set the {Lights} to the color {Color} and saturation {Saturation} in {Schedule}
+ControlLights set the {Lights} to the color {Color} and brightness {Brightness} in {Schedule}
+
+ControlLights start {short alert|Start} on the {Lights}
+ControlLights start {long alert|Start} on the {Lights}
+ControlLights start {color loop|Start} on the {Lights}
+ControlLights stop {short alert|Stop} on the {Lights}
+ControlLights stop {long alert|Stop} on the {Lights}
+ControlLights stop {color loop|Stop} on the {Lights}
+
+ControlLights save scene as {romantic|SaveScene}
+ControlLights save scene as {summer dawn|SaveScene}
+ControlLights save scene as {working at night|SaveScene}
+
+ControlLights {no|EndSession}
+ControlLights {exit|EndSession}
+ControlLights {close|EndSession}
+ControlLights {stop|EndSession}

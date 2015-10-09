@@ -1,0 +1,163 @@
+LIGHTS
+bedroom lights
+fireplace lights
+floor light
+overhead light
+
+ATTRIBUTE
+Saturation
+Brightness
+
+COLOR
+Red
+Blue
+Green
+Yellow
+Pink
+Purple
+Violet
+Turquiose
+Reading
+Relax
+Candle
+Neutral
+Concentrate
+
+LEVEL
+one
+two
+three
+four
+five
+six
+seven
+eight
+nine
+ten
+
+SCENE
+morning
+evening
+dinner
+afternoon
+
+STATE
+on
+off
+
+SCHEDULE
+one minute
+two minutes
+three minutes
+four minutes
+five minutes
+six minutes
+seven minutes
+eight minutes
+nine minutes
+ten minutes
+eleven minutes
+twelve minutes
+thirteen minutes
+fourteen minutes
+fifteen minutes
+sixteen minutes
+seventeen minutes
+eighteen minutes
+nineteen minutes
+twenty minutes
+twenty one minutes
+twenty two minutes
+twenty three minutes
+twenty four minutes
+twenty five minutes
+twenty six minutes
+twenty seven minutes
+twenty eight minutes
+twenty nine minutes
+thirty minutes
+thirty one minutes
+thirty two minutes
+thirty three minutes
+thirty four minutes
+thirty five minutes
+thirty six minutes
+thirty seven minutes
+thirty eight minutes
+thirty nine minutes
+forty minutes
+forty one minutes
+forty two minutes
+forty three minutes
+forty four minutes
+forty five minutes
+forty six minutes
+forty seven minutes
+forty eight minutes
+forty nine minutes
+fifty minutes
+fifty one minutes
+fifty two minutes
+fifty three minutes
+fifty four minutes
+fifty five minutes
+fifty six minutes
+fifty seven minutes
+fifty eight minutes
+fifty nine minutes
+sixty minutes
+one hour
+two hours
+three hours
+four hours
+five hours
+six hours
+seven hours
+eight hours
+nine hours
+ten hours
+eleven hours
+twelve hours
+thirteen hours
+fourteen hours
+fifteen hours
+sixteen hours
+seventeen hours
+eighteen hours
+nineteen hours
+twenty hours
+twenty one hours
+twenty two hours
+twenty three hours
+twenty four hours
+thirty seconds
+thirty one seconds
+thirty two seconds
+thirty three seconds
+thirty four seconds
+thirty five seconds
+thirty six seconds
+thirty seven seconds
+thirty eight seconds
+thirty nine seconds
+forty seconds
+forty one seconds
+forty two seconds
+forty three seconds
+forty four seconds
+forty five seconds
+forty six seconds
+forty seven seconds
+forty eight seconds
+forty nine seconds
+fifty seconds
+fifty one seconds
+fifty two seconds
+fifty three seconds
+fifty four seconds
+fifty five seconds
+fifty six seconds
+fifty seven seconds
+fifty eight seconds
+fifty nine seconds
+sixty seconds
