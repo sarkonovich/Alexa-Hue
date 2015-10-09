@@ -24,11 +24,13 @@ When creating the custom slot values, substitute in your scenes, light, and grou
 
 ######A couple of caveats:
 1. The Lights slot will hyphenate some two word names. So, if things aren't working, you might need to change the light/group name on your bridge (e.g., from "living room" to "living-room".)
-2. You can only recall scene names you can speak. Many apps store scenes on the bridge with alphanumeric codes, and then provide user friendly names in the app. Unfortunately, Alexa can get at those scenes. However, you can create scenes with Alexa friendly names within the skill. Just set up the lights how you like as say, "Alexa, tell [invocation name] to save scene as [romantic]. Then, add 'romantic' as a SCENE custom slot value.
+2. You can only recall scene names you can speak. Many apps store scenes on the bridge with alphanumeric codes, and then provide user friendly names in the app. Unfortunately, Alexa can't get at those scenes. However, you can create scenes with Alexa friendly names within the skill. Just set up the lights how you like and say, "Alexa, tell [invocation name] to save scene as [name]. Then, add 'name' as a SCENE custom slot value.
 
 You need to set up the local Sinatra server. Place ````app.rb````, ````lights.rb````, ````alexa_objects.rb````, and ````fix_schedule_syntax.rb```` in the same directory. Open up a terminal in that directory and type
 
 ````gem install hue_switch````
+
+to install a ruby gem. Then,
 
 ````ruby app.rb````
 
