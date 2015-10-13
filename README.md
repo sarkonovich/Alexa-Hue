@@ -23,7 +23,7 @@ Then in the Amazon [developer portal](developer.amazon.com/home.html), you'll ne
 When creating the custom slot values, substitute in your scenes, light, and group names. Single bulbs should be indicated by 'light' (e.g, "kitchen light") and groups with 'lights' (e.g., "living-room lights.) 
 
 ######A couple of caveats:
-1. The Lights slot will hyphenate some two word names. So, if things aren't working, you might need to change the light/group name on your bridge (e.g., from "living room" to "living-room".)
+1. The Lights slot will hyphenate some two word names. (This is a bug on Amazon's end....they say they're working on it.) So, if things aren't working, you might need to change the light/group name on your bridge (e.g., from "living room" to "living-room".)
 2. You can only recall scene names you can speak. Many apps store scenes on the bridge with alphanumeric codes, and then provide user friendly names in the app. Unfortunately, Alexa can't get at those scenes. However, you can create scenes with Alexa friendly names within the skill. Just set up the lights how you like and say, "Alexa, tell [invocation name] to save scene as [name]. Then, add 'name' as a SCENE custom slot value.
 
 You need to set up the local Sinatra server. Place ````app.rb````, ````lights.rb````, ````alexa_objects.rb````, and ````fix_schedule_syntax.rb```` in the same directory. Open up a terminal in that directory and type
@@ -67,14 +67,17 @@ If you've added some basic auth to the tunnel, use the following format to speci
 At this point the skill should be available to you. You can say things like:
 
 *"Alexa, tell [whatever invocation name you chose] to turn the kitchen lights blue."*
-*"Alexa, set the floor light to saturation ten and brightness five"*
-*"Alexa, change the table light to the color relax"*
-*"Alexa, turn off the bedroom lights in 5 minutes"*
-*"Alexa, turn off the kitchen lights at eight forty five"*
-*"Alexa, set dinner scene in one hour"*
-*"Alexa, start color loop on the bedside light"*
-*"Alexa, start long alert on the kitchen lights in forty five seconds"*
+*"Alexa, tell...set the floor light to saturation ten and brightness five"*
+*"Alexa, tell...change the table light to the color relax"*
+*"Alexa, tell...turn off the bedroom lights in 5 minutes"*
+*"Alexa, tell...turn on the lights at eight forty five p.m."*
+*"Alexa, tell...set dinner scene in one hour"*
+*"Alexa, tell...start color loop on the bedside light"*
+*"Alexa, tell...start long alert on the kitchen lights in forty five seconds"*
+*"Alexa, tell...stop alert"*
 
 
+You can use the "flash" command instead of "long alert." (It's just easier to say.) It's also helpful for using your lights as a timer:
 
+*"Alexa, tell...to flash the lights in five minutes."*
 
