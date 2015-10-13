@@ -52,11 +52,16 @@ ControlLights stop {short alert|Stop} on the {Lights}
 ControlLights stop {long alert|Stop} on the {Lights}
 ControlLights stop {color loop|Stop} on the {Lights}
 
+ControlLights {flash|Flash} {Lights}
+ControlLights {flash|Flash} {Lights} in {Schedule}
+ControlLights {flash|Flash} the {Lights}
+ControlLights {flash|Flash} the {Lights} in {Schedule}
+
 ControlLights save scene as {romantic|SaveScene}
 ControlLights save scene as {summer dawn|SaveScene}
 ControlLights save scene as {working at night|SaveScene}
 
-ControlLights {no|EndSession}
 ControlLights {exit|EndSession}
-ControlLights {close|EndSession}
+ControlLights {quit|EndSession}
+ControlLights {enough|EndSession}
 ControlLights {stop|EndSession}

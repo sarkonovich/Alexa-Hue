@@ -41,14 +41,14 @@
         },
         {
           "name": "Schedule",
-          "type": "SCHEDULE"
+          "type": "AMAZON.DURATION"
         },
         {
           "name": "Time",
           "type": "AMAZON.TIME"
         },
          {
-          "name": "Modifier",
+          "name": "Flash",
           "type": "AMAZON.LITERAL"
         },
         {

@@ -98,6 +98,10 @@ module Sinatra
 				}
 			end
 
+			def link_card
+				self.with_card.tap { |hs| hs[:response][:card] = {"type": "LinkAccount"} }
+			end
+
 			def without_card
 				self.with_card.tap { |hs| hs[:response].delete(:card) }
 			end
