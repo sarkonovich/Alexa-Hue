@@ -48,9 +48,8 @@ ControlLights set the {Lights} to the color {Color} and brightness {Brightness} 
 ControlLights start {short alert|Start} on the {Lights}
 ControlLights start {long alert|Start} on the {Lights}
 ControlLights start {color loop|Start} on the {Lights}
-ControlLights stop {short alert|Stop} on the {Lights}
-ControlLights stop {long alert|Stop} on the {Lights}
-ControlLights stop {color loop|Stop} on the {Lights}
+ControlLights stop {alert|Stop}
+ControlLights stop {color loop|Stop}
 
 ControlLights {flash|Flash} {Lights}
 ControlLights {flash|Flash} {Lights} in {Schedule}
