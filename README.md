@@ -61,20 +61,27 @@ Finally, head back to the lambda function on aws and replace the application_id 
 
 If you've added some basic auth to the tunnel, use the following format to specify the route to your local server in the lambda function:
 
-```http://username:password@bb1bde4a.ngrok.io/lights````
+    http://username:password@bb1bde4a.ngrok.io/lights
 
 
 
 At this point the skill should be available to you. You can say things like:
 
 *"Alexa, tell [whatever invocation name you chose] to turn the kitchen lights blue."*
+
 *"Alexa, tell...set the floor light to saturation ten and brightness five"*
+
 *"Alexa, tell...change the table light to the color relax"*
+
 *"Alexa, tell...turn off the bedroom lights in 5 minutes"*
+
 *"Alexa, tell...turn on the lights at eight forty five p.m."*
 *"Alexa, tell...set dinner scene in one hour"*
+
 *"Alexa, tell...start color loop on the bedside light"*
+
 *"Alexa, tell...start long alert on the kitchen lights in forty five seconds"*
+
 *"Alexa, tell...stop alert"*
 
 
