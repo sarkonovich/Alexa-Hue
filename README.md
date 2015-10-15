@@ -4,6 +4,8 @@
 
 Well, you already can turn them on and off and dim them with Alexa. But this Alexa program gives you much more control: change colors, recall scenes, save scenes, set timers, turn on dynamic effects (color loops and alerts) and, of course, turn them on and off and dim them.
 
+Demo here: https://youtu.be/JBZlaAQtOXQ
+
 
 Since Amazon does not give 3rd party developers a way to access your local network, we need a bit of a workaround. This skill has two components:
 
