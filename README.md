@@ -20,9 +20,15 @@ For information on how to set up the Lambda function, look at the instructions [
 
 Add your code as Node.js. Just copy and paste lambda_passthrough.js in the code editor.
 
-Then in the Amazon [developer portal](developer.amazon.com/home.html), you'll need to create a new skill, and point it to your Lambda function by selecting 'Lambda ARN' and filling in the field with the proper resource name.  After that, fill in the interaction model, custom slot values, and utterance samples. You'll also get to choose an invocation name (e.g., "hue lights", or "custom lighting", etc.) 
+Then in the Amazon [developer portal](https://developer.amazon.com/edw/home.html#/skills), you'll need to create a new skill.
 
-When creating the custom slot values, substitute in your scenes, light, and group names. Single bulbs should be indicated by 'light' (e.g, "kitchen light") and groups with 'lights' (e.g., "living-room lights.) 
+1. For "Name" pick anything you want.
+2. For "Invocation Name" pick anything you want. This is the name you'll use to open the skill (e.g., "Alexa, tell house lighting to....")
+3. For "Version Number"...anything. How about 0.0.1?
+4. For "Endpoint" select 'Lambda ARN' and point it to your Lambda function by filling in the field with the proper resource name. Just go to your Lambda Function in the AWS Console. The ARN will look something like this:  arn:aws:lambda:us-east-1:123456789805:function:my_function
+5. On the next page fill in the interaction model, custom slot values, and utterance samples by copying and pasting the info from intent_schema.txt, sample_utterances.txt and custom_slots.txt onto the appropriate form fields. 
+
+Now, for the custom slot values "LIGHTS" and "SCENES" substitute in the appropriate values for your lights and scenes. For lights, single bulbs should be indicated by 'light' (e.g, "kitchen light") and groups with 'lights' (e.g., "living room lights.) 
 
 ######Note:
 You can only recall scene names you can speak. Many apps store scenes on the bridge with alphanumeric codes, and then provide user friendly names in the app. Unfortunately, Alexa can't get at those scenes. However, you can create scenes with Alexa friendly names within the skill. Just set up the lights how you like and say, "Alexa, tell [invocation name] to save scene as [name]. Then, add 'name' as a SCENE custom slot value.
