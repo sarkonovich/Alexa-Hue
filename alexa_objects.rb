@@ -1,4 +1,4 @@
-module Sinatra
+
 	module AlexaObjects
 		class EchoRequest
 			attr_reader :intent_name, :slots, :timestamp, :request_type, :session_new, :user_id, :access_token, :application_id
@@ -53,15 +53,17 @@ module Sinatra
 		end
 
 		class Response
-			attr_accessor :session_attributes, :spoken_response, :card_title, :card_content, :reprompt_text, :end_session, :speech_type
-			def initialize (session_attributes: {}, spoken_response: nil, card_title: nil, card_content: nil, reprompt_text: nil, speech_type: "PlainText", end_session: nil)
-				@session_attributes = session_attributes
-				@speech_type = speech_type
-				@spoken_response = spoken_response
-				@card_title = card_title
-				@card_content = card_content
-				@reprompt_text = reprompt_text
-				@end_session = end_session
+			attr_accessor :session_attributes, :spoken_response, :card_title, :card_content, :reprompt_text, :end_session, :speech_type, :text_type
+			def initialize
+				@session_attributes = {}
+				@speech_type = "PlainText"
+				@spoken_response = nil
+				@card_title = nil
+				@card_content = nil
+				@reprompt_text = nil
+				@text_type = "text"
+				@end_session = true
+
 			end
 
 			def add_attribute(key, value)
@@ -74,13 +76,13 @@ module Sinatra
 
 			def with_card
 					{
-					  "version": "1.0",
+					  "version": "2.0",
 					  "sessionAttributes":
 					    @session_attributes, 	
 						"response": {
 						  "outputSpeech": {
 						    "type": speech_type,
-						    "text": spoken_response
+						    "#{text_type}": spoken_response
 						  },
 						  "card": {
 						    "type": "Simple",
@@ -107,4 +109,4 @@ module Sinatra
 			end
 		end
 	end
-end
+
