@@ -33,11 +33,20 @@ Now, for the custom slot values "LIGHTS" and "SCENES" substitute in the appropri
 ######Note:
 You can only recall scene names you can speak. Many apps store scenes on the bridge with alphanumeric codes, and then provide user friendly names in the app. Unfortunately, Alexa can't get at those scenes. However, you can create scenes with Alexa friendly names within the skill. Just set up the lights how you like and say, "Alexa, tell [invocation name] to save scene as [name]. Then, add 'name' as a SCENE custom slot value.
 
+The program require ruby 2.0 or above, and two gems:  sinatra and hue_switch.
+
+To install ruby, I suggest using RVM. Instructions are [here.](https://rvm.io/rvm/install)
+After rvm is installed, install a recent version of ruby:
+
+````rvm install 2.2.0 --disable-binary````
+
 You need to set up the local Sinatra server. Place ````app.rb````, ````lights.rb````, ````alexa_objects.rb````, and ````fix_schedule_syntax.rb```` in the same directory. Open up a terminal in that directory and type
+
+````gem install sinatra````
 
 ````gem install hue_switch````
 
-to install a ruby gem. Then,
+to install the needed gems. Then,
 
 ````ruby app.rb````
 
