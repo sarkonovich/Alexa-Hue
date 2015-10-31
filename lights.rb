@@ -46,7 +46,15 @@ module Sinatra
 				LEVELS.keys.reverse_each { |level| @string.sub!(level, LEVELS[level]) } if @string.scan("schedule").empty?
         @string.strip!
  
-        switch = Switch.new
+        begin
+          switch = Switch.new
+        rescue RuntimeError
+          r = AlexaObjects::Response.new
+          r.end_session = true
+          r.spoken_response = "Hello. Before using Hue lighting, you'll need to give me access to your Hue bridge." +
+                              " Please press the link button on your bridge and launch the skill again within ten seconds."
+          halt r.without_card.to_json
+        end
         switch.voice @string.gsub('%20', ' ')
 
         AlexaObjects::Response.new(

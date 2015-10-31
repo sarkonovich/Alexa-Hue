@@ -82,6 +82,9 @@ If you've added some basic auth to the tunnel, use the following format to speci
 
 
 
+Before you can use the skill, you'll need to give it access to your Hue bridge. Press the link button on your bridge and launch the skill (within, I think, 20 seconds or so.)
+If you don't do this step, Alexa will remind you.
+
 At this point the skill should be available to you. You can say things like:
 
 *"Alexa, tell [whatever invocation name you chose] to turn the kitchen lights blue."*
