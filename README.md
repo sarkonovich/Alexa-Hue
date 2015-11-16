@@ -40,6 +40,9 @@ After rvm is installed, install a recent version of ruby:
 
 ````rvm install 2.2.0 --disable-binary````
 
+[Note about windows. The way the hue_switch gem currently gets your bridge IP address is a bit lame, and seems not to play so well with windows. If you get an SSL error when starting up app.rb, you might look [here](https://gist.github.com/fnichol/867550) for help. I gonna fix the gem to use SSDP soon.]
+
+
 You need to set up the local Sinatra server. Place ````app.rb````, ````lights.rb````, ````alexa_objects.rb````, and ````fix_schedule_syntax.rb```` in the same directory. Open up a terminal in that directory and type
 
 ````gem install sinatra````
