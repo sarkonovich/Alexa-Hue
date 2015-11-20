@@ -17,10 +17,10 @@ module Sinatra
         
         # Behavior for Launch Request
         if @echo_request.launch_request?
-          AlexaObjects::Response.new(
-            spoken_response: "I'm ready to control the lights", 
-            end_session: false
-          ).without_card.to_json
+          response = AlexaObjects::Response.new
+          response.spoken_response = "I'm ready to control the lights"
+          response.end_session = false
+          response.without_card.to_json
         
         # Behavior for ControlLights intent. Keys and values need to be adjusted a bit to work with HueSwitch #voice syntax.
         elsif @echo_request.intent_name == "ControlLights"
@@ -49,26 +49,31 @@ module Sinatra
         begin
           switch = Switch.new
         rescue RuntimeError
-          r = AlexaObjects::Response.new
-          r.end_session = true
-          r.spoken_response = "Hello. Before using Hue lighting, you'll need to give me access to your Hue bridge." +
+          response = AlexaObjects::Response.new
+          response.end_session = true
+          response.spoken_response = "Hello. Before using Hue lighting, you'll need to give me access to your Hue bridge." +
                               " Please press the link button on your bridge and launch the skill again within ten seconds."
-          halt r.without_card.to_json
+          halt response.without_card.to_json
         end
         switch.voice @string.gsub('%20', ' ')
 
-        AlexaObjects::Response.new(
-          end_session: true,
-          spoken_response: "okay",
-          card_content: "#{@string}...#{@data}"
-        ).without_card.to_json # change to .with_card.to_json for debugging info
+        response = AlexaObjects::Response.new
+        response.end_session = true
+        response.spoken_response  "okay"
+        response.card_content =  "#{@string}...#{@data}"
+        response.without_card.to_json # change to .with_card.to_json for debugging info
           
         # Behavior for End Session requests.
         elsif @echo_request.intent_name == "EndSession"
-          AlexaObjects::Response.new(end_session: true, spoken_response: "exiting lighting").without_card.to_json
+          response = AlexaObjects::Response.new
+          response.end_session = true
+          response.spoken_response = "exiting "lighting
+          response.without_card.to_json
         
         elsif @echo_request.session_ended_request?
-          AlexaObjects::Response.new(end_session: true).without_card.to_json
+          response = AlexaObjects::Response.new
+          response.end_session = true
+          response.without_card.to_json
         end
       end
     end
