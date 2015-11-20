@@ -67,7 +67,7 @@ module Sinatra
         elsif @echo_request.intent_name == "EndSession"
           response = AlexaObjects::Response.new
           response.end_session = true
-          response.spoken_response = "exiting "lighting
+          response.spoken_response = "exiting lighting"
           response.without_card.to_json
         
         elsif @echo_request.session_ended_request?
