@@ -59,7 +59,7 @@ module Sinatra
 
         response = AlexaObjects::Response.new
         response.end_session = true
-        response.spoken_response  "okay"
+        response.spoken_response = "okay"
         response.card_content =  "#{@string}...#{@data}"
         response.without_card.to_json # change to .with_card.to_json for debugging info
           
