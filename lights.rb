@@ -1,6 +1,6 @@
 require 'numbers_in_words'
 require 'numbers_in_words/duck_punch'
-require 'hue_switch'
+require './hue_switch'
 require 'chronic_duration'
 require './fix_schedule_syntax'
 
