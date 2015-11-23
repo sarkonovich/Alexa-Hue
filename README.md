@@ -12,7 +12,7 @@ Since Amazon does not give 3rd party developers a way to access your local netwo
 1. An Amazon Alexa Lambda function -- thanks to [Matt Kruse](https://forums.developer.amazon.com/forums/profile.jspa?userID=13686) -- on AWS that just passes the Alexa request onto...
 2. A server on your local network that does have access your Hue Bridge.
 
-To deploy the Lambda function, you'll need to set up a developer account at the [developer portal.](developer.amazon.com/home.html)
+To deploy the Lambda function, you'll need to set up a developer account at the [developer portal.](https://developer.amazon.com/home.html)
 
 For information on how to set up the Lambda function, look at the instructions [here.](https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/developing-an-alexa-skill-as-a-lambda-function)
 
@@ -40,7 +40,9 @@ After rvm is installed, install a recent version of ruby:
 
 ````rvm install 2.2.0 --disable-binary````
 
-You need to set up the local Sinatra server. Place ````app.rb````, ````lights.rb````, ````hue_switch.rb, ````alexa_objects.rb````, and ````fix_schedule_syntax.rb```` in the same directory. Open up a terminal in that directory and type
+
+You need to set up the local Sinatra server. Place ````app.rb````, ````lights.rb````, ````alexa_objects.rb````, and ````fix_schedule_syntax.rb```` in the same directory. Open up a terminal in that directory and type
+
 
 ````gem install sinatra````
 
