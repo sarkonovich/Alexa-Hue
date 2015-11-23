@@ -41,12 +41,21 @@ After rvm is installed, install a recent version of ruby:
 ````rvm install 2.2.0 --disable-binary````
 
 
-You need to set up the local Sinatra server. Place ````app.rb````, ````lights.rb````, ````alexa_objects.rb````, and ````fix_schedule_syntax.rb```` in the same directory. Open up a terminal in that directory and type
-
+Place all files in the same directory. And then type
 
 ````gem install sinatra````
 
-to install sinatra web server. Then,
+to install the sinatra web server. Then
+
+
+````bundle install````
+
+to install the needed gems. If you don't already have bundler installed (and you get errors on the last step) you might need to
+
+````gem install bundler````
+
+and the repeat the last step. Finally, 
+
 
 ````ruby app.rb````
 
