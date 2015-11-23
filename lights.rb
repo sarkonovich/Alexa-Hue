@@ -47,7 +47,7 @@ module Sinatra
         @string.strip!
  
         begin
-          switch = Switch.new
+          switch = Hue::Switch.new
         rescue RuntimeError
           response = AlexaObjects::Response.new
           response.end_session = true
