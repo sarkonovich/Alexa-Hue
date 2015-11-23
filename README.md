@@ -43,6 +43,7 @@ After rvm is installed, install a recent version of ruby:
 
 Place all files in the same directory. And then type
 
+
 ````gem install sinatra````
 
 to install the sinatra web server. Then

@@ -1,6 +1,6 @@
 require 'numbers_in_words'
 require 'numbers_in_words/duck_punch'
-require 'hue_switch'
+require './hue_switch'
 require 'chronic_duration'
 require './fix_schedule_syntax'
 
@@ -47,7 +47,7 @@ module Sinatra
         @string.strip!
  
         begin
-          switch = Switch.new
+          switch = Hue::Switch.new
         rescue RuntimeError
           response = AlexaObjects::Response.new
           response.end_session = true
