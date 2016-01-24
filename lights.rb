@@ -45,6 +45,7 @@ module Sinatra
 				@string.sub!("color loop", "colorloop")
 				LEVELS.keys.reverse_each { |level| @string.sub!(level, LEVELS[level]) } if @string.scan("schedule").empty?
         @string.strip!
+        @string = @string.downcase
  
         begin
           switch = Hue::Switch.new
@@ -59,7 +60,7 @@ module Sinatra
         @string.gsub!('%20', ' ')
 
         if  @string.include?('lights')
-          if (@string.split(' ') & switch.list_groups.keys).empty?
+          if (@string.split(' ') & switch.list_groups.keys.downcase).empty?
             r = AlexaObjects::Response.new
             r.end_session = true
             r.spoken_response = "I couldn't find a group with that name."
@@ -68,7 +69,7 @@ module Sinatra
         end
 
         if  @string.include?('light ')
-          if (@string.split(' ') & switch.list_lights.keys).empty?
+          if (@string.split(' ') & switch.list_lights.keys.downcase).empty?
             r = AlexaObjects::Response.new
             r.end_session = true
             r.spoken_response = "I couldn't find a light with that name."
