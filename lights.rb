@@ -55,7 +55,28 @@ module Sinatra
                               " Please press the link button on your bridge and launch the skill again within ten seconds."
           halt response.without_card.to_json
         end
-        switch.voice @string.gsub('%20', ' ')
+        
+        @string.gsub!('%20', ' ')
+
+        if  @string.include?('lights')
+          if (@string.split(' ') & switch.list_groups.keys).empty?
+            r = AlexaObjects::Response.new
+            r.end_session = true
+            r.spoken_response = "I couldn't find a group with that name."
+            halt r.without_card.to_json
+          end
+        end
+
+        if  @string.include?('light ')
+          if (@string.split(' ') & switch.list_lights.keys).empty?
+            r = AlexaObjects::Response.new
+            r.end_session = true
+            r.spoken_response = "I couldn't find a light with that name."
+            halt r.without_card.to_json
+          end
+        end
+
+        switch.voice @string
 
         response = AlexaObjects::Response.new
         response.end_session = true
