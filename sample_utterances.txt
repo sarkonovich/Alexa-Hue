@@ -59,6 +59,8 @@ ControlLights {flash|Flash} the {Lights} in {Schedule}
 ControlLights save scene as {romantic|SaveScene}
 ControlLights save scene as {summer dawn|SaveScene}
 ControlLights save scene as {working at night|SaveScene}
+ControlLights save scene as {purple|SaveScene}
+ControlLights save scene as {midnight cave|SaveScene}
 
 ControlLights {exit|EndSession}
 ControlLights {quit|EndSession}
