@@ -51,9 +51,6 @@ module Sinatra
         
 				fix_schedule_syntax(@string)        
 				@string.sub!("color loop", "colorloop")
-				puts @string
-				#  LEVELS.keys.reverse_each { |level| @string.sub!(level, LEVELS[level]) } if @string.scan("schedule").empty?
-				puts @string
 				@string.strip!
  
         begin
@@ -66,7 +63,7 @@ module Sinatra
           halt response.without_card.to_json
         end
         
-				if @echo_request.slots.lights.nil? && @echo_request.slots.scene.nil?
+				if @echo_request.slots.lights.nil? && @echo_request.slots.scene.nil? && @echo_request.slots.savescene.nil?
 					r = AlexaObjects::Response.new
 					r.end_session = false
 					r.spoken_response = "Please specify which light or lights you'd like to adjust. I'm ready to control the lights."
