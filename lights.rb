@@ -92,26 +92,25 @@ module Sinatra
           end
 
   				if @echo_request.slots.lights
-    				if @echo_request.slots.lights.include?('lights')
-    					 puts switch.list_groups.keys.join(', ').downcase
-    					if !(switch.list_groups.keys.join(', ').downcase.include?("#{@echo_request.slots.lights.sub(' lights','')}"))
+            if @echo_request.slots.lights.include?('lights')
+               puts switch.list_groups.keys.join(', ').downcase
+              if !(switch.list_groups.keys.join(', ').downcase.include?("#{@echo_request.slots.lights.downcase.sub(' lights','')}"))
                 r = AlexaObjects::Response.new
                 r.end_session = true
                 r.spoken_response = "I couldn't find a group with the name #{@echo_request.slots.lights}"
                 halt r.without_card.to_json
               end
-            end
-
-  				elsif  @echo_request.slots.lights.include?('light')
-  					if  !(switch.list_lights.keys.join(', ').downcase.include?("#{@echo_request.slots.lights.sub(' light','')}"))
-              r = AlexaObjects::Response.new
-              r.end_session = true
-              r.spoken_response = "I couldn't find a light with the name #{@echo_request.slots.lights}"
-              halt r.without_card.to_json
+            elsif  @echo_request.slots.lights.include?('light')
+              if  !(switch.list_lights.keys.join(', ').downcase.include?("#{@echo_request.slots.lights.downcase.sub(' light','')}"))
+                r = AlexaObjects::Response.new
+                r.end_session = true
+                r.spoken_response = "I couldn't find a light with the name #{@echo_request.slots.lights}"
+                halt r.without_card.to_json
+              end
             end
           end
 				
-        switch.voice @string 
+        switch.voice @string.downcase 
 
         response = AlexaObjects::Response.new
         response.end_session = true
