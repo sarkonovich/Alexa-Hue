@@ -110,7 +110,6 @@ module Sinatra
               halt r.without_card.to_json
             end
           end
-  			end
 				
         switch.voice @string 
 
