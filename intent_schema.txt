@@ -1,6 +1,14 @@
 {
   "intents": [
     {
+      "intent": "AMAZON.StopIntent"
+      
+    },
+    {
+      "intent": "AMAZON.CancelIntent"
+      
+    },
+    {
       "intent": "ControlLights",
       "slots": [
         {
@@ -54,11 +62,7 @@
         {
           "name": "Scene",
           "type": "SCENE"
-        },
-        {
-          "name": "EndSession",
-          "type": "AMAZON.LITERAL"
-        }
+        } 
       ] 
     }
   ]

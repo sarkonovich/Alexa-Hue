@@ -4,6 +4,8 @@ ControlLights set {Scene} scene
 ControlLights set scene {Scene}
 ControlLights set the scene {Scene}
 
+ControlLights schedule {Scene} scene at {Time}
+
 ControlLights turn the {Lights} {Color}
 ControlLights turn the {Lights} to {Color}
 ControlLights turn the {Lights} to the {Color}
@@ -48,8 +50,8 @@ ControlLights set the {Lights} to the color {Color} and brightness {Brightness} 
 ControlLights start {short alert|Start} on the {Lights}
 ControlLights start {long alert|Start} on the {Lights}
 ControlLights start {color loop|Start} on the {Lights}
-ControlLights stop {alert|Stop}
-ControlLights stop {color loop|Stop}
+ControlLights stop {alert|Stop} on the {Lights}
+ControlLights stop {color loop|Stop} on the {Lights}
 
 ControlLights {flash|Flash} {Lights}
 ControlLights {flash|Flash} {Lights} in {Schedule}
@@ -59,8 +61,5 @@ ControlLights {flash|Flash} the {Lights} in {Schedule}
 ControlLights save scene as {romantic|SaveScene}
 ControlLights save scene as {summer dawn|SaveScene}
 ControlLights save scene as {working at night|SaveScene}
-
-ControlLights {exit|EndSession}
-ControlLights {quit|EndSession}
-ControlLights {enough|EndSession}
-ControlLights {stop|EndSession}
+ControlLights save scene as {purple|SaveScene}
+ControlLights save scene as {midnight cave|SaveScene}

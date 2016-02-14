@@ -21,10 +21,29 @@ module Sinatra
           response.spoken_response = "I'm ready to control the lights"
           response.end_session = false
           response.without_card.to_json
+
+        elsif @echo_request.intent_name == "AMAZON.StopIntent"
+          response = AlexaObjects::Response.new
+          response.spoken_response = "Goodbye"
+          response.end_session = false
+          response.without_card.to_json
+        elsif @echo_request.intent_name == "AMAZON.CancelIntent"
+          response = AlexaObjects::Response.new
+          response.spoken_response = "Cancelling. I'm ready to control the lights."
+          response.end_session = false
+          response.without_card.to_json  
         
         # Behavior for ControlLights intent. Keys and values need to be adjusted a bit to work with HueSwitch #voice syntax.
         elsif @echo_request.intent_name == "ControlLights"
-         @echo_request.slots.to_h.each do |k,v| 
+        if @echo_request.slots.brightness
+				  LEVELS.keys.reverse_each { |level| @echo_request.slots.brightness.sub!(level, LEVELS[level]) } if @echo_request.slots.schedule.nil? 
+				end
+
+				if @echo_request.slots.saturation
+          LEVELS.keys.reverse_each { |level| @echo_request.slots.saturation.sub!(level, LEVELS[level]) } if @echo_request.slots.schedule.nil?
+        end
+
+				@echo_request.slots.to_h.each do |k,v| 
           @string ||= ""
           next unless v
           if k == :scene || k == :alert
@@ -41,10 +60,9 @@ module Sinatra
         end
         
 				fix_schedule_syntax(@string)        
-
 				@string.sub!("color loop", "colorloop")
-				LEVELS.keys.reverse_each { |level| @string.sub!(level, LEVELS[level]) } if @string.scan("schedule").empty?
-        @string.strip!
+				@string.strip!
+        p @string
  
         begin
           switch = Hue::Switch.new
@@ -55,7 +73,54 @@ module Sinatra
                               " Please press the link button on your bridge and launch the skill again within ten seconds."
           halt response.without_card.to_json
         end
-        switch.voice @string.gsub('%20', ' ')
+        
+				if @echo_request.slots.lights.nil? && @echo_request.slots.scene.nil? && @echo_request.slots.savescene.nil?
+					r = AlexaObjects::Response.new
+					r.end_session = false
+					r.spoken_response = "Please specify which light or lights you'd like to adjust. I'm ready to control the lights."
+					halt r.without_card.to_json
+				end
+
+				 if @echo_request.slots.lights
+					if @echo_request.slots.lights.scan(/light|lights/).empty?
+            r = AlexaObjects::Response.new
+            r.end_session = false
+            r.spoken_response = "Please specify which light or lights you'd like to adjust. I'm ready to control the lights."
+            halt r.without_card.to_json
+				  end
+        end
+
+				puts @echo_request.slots.lights
+				if @echo_request.slots.lights
+				if @echo_request.slots.lights.include?('lights')
+					 puts switch.list_groups.keys.join(', ').downcase
+					if !(switch.list_groups.keys.join(', ').downcase.include?("#{@echo_request.slots.lights.sub(' lights','')}"))
+            r = AlexaObjects::Response.new
+            r.end_session = true
+            r.spoken_response = "I couldn't find a group with the name #{@echo_request.slots.lights}"
+            halt r.without_card.to_json
+          end
+
+				elsif  @echo_request.slots.lights.include?('light')
+					if  !(switch.list_lights.keys.join(', ').downcase.include?("#{@echo_request.slots.lights.sub(' light','')}"))
+            r = AlexaObjects::Response.new
+            r.end_session = true
+            r.spoken_response = "I couldn't find a light with the name #{@echo_request.slots.lights}"
+            halt r.without_card.to_json
+          end
+        end
+			end
+				
+
+        #if  @string.include?('light ')
+        #  if (@string.split(' ') & switch.list_lights.keys.join(', ').downcase.split(', ')).empty?
+        #    r = AlexaObjects::Response.new
+        #    r.end_session = true
+        #    r.spoken_response = "I couldn't find a light with the name #{@echo_request.slots.lights}"
+        #    halt r.without_card.to_json
+        #  end
+        #end
+        switch.voice @string 
 
         response = AlexaObjects::Response.new
         response.end_session = true
