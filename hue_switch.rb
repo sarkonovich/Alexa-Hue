@@ -55,6 +55,25 @@ module Hue
       self.body = {}
       instance_eval(&block) if block_given?
     end
+    
+    def list_lights
+      light_list = {}
+      HTTParty.get("http://#{@ip}/api/#{@user}/lights").each { |k,v| light_list["#{v['name']}".downcase] = k }
+      light_list
+    end
+
+    def list_groups
+      group_list = {}
+      HTTParty.get("http://#{@ip}/api/#{@user}/groups").each { |k,v| group_list["#{v['name']}".downcase] = k }
+      group_list["all"] = "0"
+      group_list
+    end
+
+    def list_scenes
+      scene_list = []
+      HTTParty.get("http://#{@ip}/api/#{@user}/scenes").keys.each { |k| scene_list.push(k) }
+      scene_list
+    end
 
     def hue (numeric_value)
       clear_attributes

@@ -43,6 +43,10 @@ module Sinatra
           LEVELS.keys.reverse_each { |level| @echo_request.slots.saturation.sub!(level, LEVELS[level]) } if @echo_request.slots.schedule.nil?
         end
 
+<<<<<<< HEAD
+=======
+				puts @echo_request.slots
+>>>>>>> origin/master
 				@echo_request.slots.to_h.each do |k,v| 
           @string ||= ""
           next unless v
@@ -62,7 +66,10 @@ module Sinatra
 				fix_schedule_syntax(@string)        
 				@string.sub!("color loop", "colorloop")
 				@string.strip!
+<<<<<<< HEAD
         p @string
+=======
+>>>>>>> origin/master
  
         begin
           switch = Hue::Switch.new

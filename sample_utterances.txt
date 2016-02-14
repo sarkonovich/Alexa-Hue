@@ -62,4 +62,13 @@ ControlLights save scene as {romantic|SaveScene}
 ControlLights save scene as {summer dawn|SaveScene}
 ControlLights save scene as {working at night|SaveScene}
 ControlLights save scene as {purple|SaveScene}
+<<<<<<< HEAD
 ControlLights save scene as {midnight cave|SaveScene}
+=======
+ControlLights save scene as {midnight cave|SaveScene}
+
+ControlLights {exit|EndSession}
+ControlLights {quit|EndSession}
+ControlLights {enough|EndSession}
+ControlLights {stop|EndSession}
+>>>>>>> origin/master
