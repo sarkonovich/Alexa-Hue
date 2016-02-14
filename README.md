@@ -64,7 +64,7 @@ That’s it! (One note: don’t put the word “scene” in the scene name. So t
 
 Now, if you want a scene to only affect a group of lights, there’s just one extra step. First, you need to assign that group to the switch  ````s```` so that it only controls that group. To see all the groups you have, type: 
 
-    s.list_group
+    s.list_groups
 
 You should get a listing of your groups. (Ignore the numbers that are associated with the names.) Let’s say you have a group called “kitchen.” To get the switch s to control just the kitchen lights, type:
 
