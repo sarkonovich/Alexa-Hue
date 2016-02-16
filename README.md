@@ -86,9 +86,9 @@ Alexa Hue uses the light groups stored on the Hue Bridge. Some apps that let you
 
 The fix is easy: just create (or re-create) the groups with an app that *does* store groups on the bridge. There are lots that do. One is called OnSwitch for Philips Hue. It's available for both iOS and Android.
 
-#####End Long Note About Groups and Scenes#####
+#####That's the end of the long note about groups and scenes#####
 
-The program require ruby 2.0 or above, and two gems:  sinatra and hue_switch.
+The program requires ruby 2.0 or above, and some Ruby Gems.
 
 To install ruby, I suggest using RVM. Instructions are [here.](https://rvm.io/rvm/install)
 After rvm is installed, install a recent version of ruby:
