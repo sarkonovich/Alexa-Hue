@@ -128,7 +128,7 @@ Andd you can add a bit of security by requiring basic auth credentials
 
 ````./ngrok http -auth="username:password" 4567````
 
-(For a bit more security, uncomment the application id check on line 15 of lights.rb and plug in the application id of your skill from the developer's portal.)
+(For a bit more security, uncomment the application id check on line 16 of lights.rb and plug in the application id of your skill from the developer's portal.)
 
 If using ngrok, you'll end up looking at something like this, which is the public IP address of the tunnel to your local server.
                                                                                     
