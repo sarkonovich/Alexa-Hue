@@ -120,7 +120,7 @@ to start the server on port 4567.
 Almost done!
 
 You need some way to expose the server to the internets. I like to use an [ngrok](https://ngrok.com/) tunnel.
-Download the appropriate version of the program and start it up like this:
+Download the appropriate version of the program, open up a new terminal window, and start it up like this:
 
 ````./ngrok http 4567````
 
