@@ -112,7 +112,7 @@ Double-check that you've got Ruby installed.
 ````ruby --version````
 
 
-Now that you've gotten Ruby installed, place all files from this repository in the same directory. Call it whatever you want. Open up a terminal window in that directory and type
+Now that you've gotten Ruby installed, create a directory that's convenient to get to (maybe on your desktop...)  Call it whatever you want. Copy all of the files from this repository into that directory. Open up a terminal window in that directory and type
 
 ````bundle install````
 
