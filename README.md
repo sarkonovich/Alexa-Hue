@@ -27,6 +27,9 @@ Then in the Amazon [developer portal](https://developer.amazon.com/edw/home.html
 3. For "Version Number"...anything. How about 0.0.1?
 4. For "Endpoint" select 'Lambda ARN' and point it to your Lambda function by filling in the field with the proper resource name. Just go to your Lambda Function in the AWS Console. The ARN will look something like this:  arn:aws:lambda:us-east-1:123456789805:function:my_function
 5. On the next page fill in the interaction model, custom slot values, and utterance samples by copying and pasting the info from intent_schema.txt, sample_utterances.txt and custom_slots.txt onto the appropriate form fields. 
+6. Create custom slots first. In the "custom slot type" section, you'll see a button "Add Slot Type." Click on that. Add the slot name in the "Enter Type" box.  The name will be one of the all caps names from the custom_slots.txt, e.g., LIGHTS or ATTRIBUTE. Then paste in the values (they appear just below that all caps name in the custom_slots.txt), one value per line, in the "Enter Values" box. Then click  "OK."  In the end you're going to create 6 different custom slots. 
+7. Copy/paste the contents of intent_schema.txt into the "Intent Schema" box.
+8. Copy/paste the contents of utterance_samples.txt into the "Sample Utterances" box.
 
 Now, for the custom slot values "LIGHTS" and "SCENES" substitute in the appropriate values for your lights and scenes. For lights, single bulbs should be indicated by 'light' (e.g, "kitchen light") and groups with 'lights' (e.g., "living room lights.) 
 
@@ -90,19 +93,26 @@ The fix is easy: just create (or re-create) the groups with an app that *does* s
 
 The program requires ruby 2.0 or above, and some Ruby Gems.
 
-To install ruby, I suggest using RVM. Instructions are [here.](https://rvm.io/rvm/install)
-After rvm is installed, install a recent version of ruby:
+Now you need to check that you've got a proper version of Ruby installed. In a terminal window just type
+````ruby --version````
 
+Make sure that you've got 2.0.0 or above.
+
+If you don't have Ruby installed, you'll need to install it.
+
+For Windows, just use [RubyInstaller](http://rubyinstaller.org/downloads/)
+
+For OSX or Linux, I suggest using RVM. Instructions are [here.](https://rvm.io/rvm/install)
+
+Once RVM is installed (again, only install RVM if you're not using Windows+RubyInstaller), install a recent version of ruby
 ````rvm install 2.2.0 --disable-binary````
 
+Double-check that you've got Ruby installed.
 
-Place all files in the same directory. And then type
+````ruby --version````
 
 
-````gem install sinatra````
-
-to install the sinatra web server. Then
-
+Now that you've gotten Ruby installed, place all files from this repository in the same directory. Call it whatever you want. Open up a terminal window in that directory and type
 
 ````bundle install````
 
@@ -117,7 +127,7 @@ and the repeat the last step. Finally,
 
 to start the server on port 4567.
 
-Almost done!
+Whew! Almost done!
 
 You need some way to expose the server to the internets. I like to use an [ngrok](https://ngrok.com/) tunnel.
 Download the appropriate version of the program, open up a new terminal window, and start it up like this:
