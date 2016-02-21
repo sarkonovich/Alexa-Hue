@@ -18,7 +18,7 @@ For information on how to set up the Lambda function, look at the instructions [
 
 (In particular, follow the steps under "Creating a Lambda Function for an Alexa Skill")
 
-Add your code as Node.js. Just copy and paste lambda_passthrough.js in the code editor.
+When you get to the step that says, "When you are ready to add your own code, edit the function and select the Code tab," you'll be copying and pasting in the text from lambda_passthrough.js. Add your code as Node.js. Just copy and paste lambda_passthrough.js in the code editor.
 
 Then in the Amazon [developer portal](https://developer.amazon.com/edw/home.html#/skills), you'll need to create a new skill.
 
