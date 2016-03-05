@@ -110,7 +110,7 @@ module Sinatra
       
         # Logic for light adjustments
 
-          if @echo_request.slots.lights
+          if @echo_request.slots.lights.downcase
             
             light_name = @echo_request.slots.lights
             
