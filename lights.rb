@@ -176,22 +176,25 @@ module Sinatra
             halt response. without_card.to_json
           
           elsif @echo_request.slots.scene
-            scene_name = @echo_request.slots.scene
+            
+            scene_name = @echo_request.slots.scene.downcase
+            
+            if switch.scenes.keys.include?(scene_name)
+              switch.scene scene_name
+            else
+              response.end_session = false
+              response.spoken_response = "I couldn't find a scene named #{scene_name}. I've sent a card to the Alexa app with the available scenes." +
+                                          " I'm ready to control the lights."
+              response.card_title = "Scenes"
+              response.card_content = "#{switch.pretty_scenes}"
+              halt response. with_card.to_json
+            end
+            
             if @echo_request.slots.absolutetime.nil? && @echo_request.slots.relativetime.nil?
-              if switch.scenes.keys.include?(scene_name)
-                switch.scene scene_name
-                switch.on
-                response.end_session = true
-                response.spoken_response = "Setting #{scene_name} scene"
-                halt response. without_card.to_json
-              else
-                response.end_session = false
-                response.spoken_response = "I couldn't find a scene named #{scene_name}. I've sent a card to the Alexa app with the available scenes." +
-                                            " I'm ready to control the lights."
-                response.card_title = "Scenes"
-                response.card_content = "#{switch.pretty_scenes}"
-                halt response. with_card.to_json
-              end
+              switch.on
+              response.end_session = true
+              response.spoken_response = "Setting #{scene_name} scene"
+              halt response. without_card.to_json
             end
           end
             
