@@ -42,6 +42,8 @@ ControlLights turn {State} {Lights} at {AbsoluteTime}
 
 ControlLights {Lights} brightness {Brightness} 
 ControlLights set the {Lights} to brightness {Brightness}
+ControlLights change the {Lights} to brightness {Brightness}
+
 ControlLights raise the {Lights} to brightness {Brightness}
 ControlLights dim the {Lights} to brightness {Brightness}
 ControlLights {Lights} saturation {Saturation} 
@@ -58,6 +60,10 @@ ControlLights {stop|Event} {Alert} on the {Lights}
 ControlLights {Alert} on the {Lights}
 ControlLights {start|Event} {Alert}
 ControlLights {stop|Event} {Alert}
+ControlLights {start|Event} {Alert} on the {Lights} in {RelativeTime}
+ControlLights {start|Event} {Alert} on the {Lights} in {AbsoluteTime}
+ControlLights {stop|Event} {Alert} on the {Lights} in {RelativeTime}
+ControlLights {stop|Event} {Alert} on the {Lights} in {AbsoluteTime}
 
 
 ControlLights save scene as {romantic|SaveScene}
