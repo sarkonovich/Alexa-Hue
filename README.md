@@ -37,7 +37,7 @@ Now, for the custom slot values "LIGHTS" and "SCENES" substitute in the appropri
 
 The program requires ruby 2.0 or above, and some Ruby Gems.
 
-Now you need to check that you've got a proper version of Ruby installed. In a terminal window just type
+First, check that you've got a proper version of Ruby installed. In a terminal window just type
 ````ruby --version````
 
 Make sure that you've got 2.0.0 or above.
@@ -71,10 +71,24 @@ and the repeat the last step. Finally,
 
 to start the server on port 4567.
 
+######Troubleshooting######
+
+Here are some possible errors you might get at this point
+
+1. *Syntax Errors in alexa_objects.rb.* 
+You dont' have ruby 2.0 or above installed, or are not using it to run the prograam Make sure you're actually *using* the version you installed with rvm. Type ````rvm use 2.0```` (or whatever version you installed) in the terminal window and start up the server (````ruby app.rb````) again.
+
+2. *You get an RVM is not a function error*. You didn't install rvm correctly, maybe you used sudo to do the install. Type
+````/bin/bash --login```` in the terminal window and then try to startup the server again.
+
+3. *You get a message that required gems are missing.* If ````bundle install```` completed successfully and you're getting this message, the gems are not installed in the directory the program  is looking at. You can type ````gem list```` to see the available gems. The solution here is probably the same as in step one. ````rvm use 2.0```` (or whatever version you installed) and try again to start the server. That should work.
+
 Whew! Almost done!
 
+#####NGROK#####
+
 You need some way to expose the server to the internets. I like to use an [ngrok](https://ngrok.com/) tunnel.
-Download the appropriate version of the program, open up a new terminal window, and start it up like this:
+Download the appropriate version of the program, open up a **new** terminal window, and start it up like this:
 
 ````./ngrok http 4567````
 
@@ -148,4 +162,7 @@ Or, to save the scene for just a group:
 
 *"Alexa, tell....to save scene as romantic on the kitchen lights."*
 
-NOTE: These commands will work better (Alexa's recognition of scene names) will be much better if you include the scene name in the SCENES custom slot before adding the scenes by voice. Even if you add scenes with an app, recognition will be much better if you add the scene (and group, and light) names to as values in the relevant custom slot.
+NOTE: I have not included lots and lots of sample utterances or custom slot values. Because of this, the voice recognition for arbitrary words will not be very good. However, the recognition for the supplied values will be very, very good. (It's a trade off.) Since you you using this to control just your lights, there's no need for the program to recognize just anything you say. 
+
+
+Therefore, when saving and recalling scenes, the commands will work *much* better (Alexa's recognition of scene names) if you include the scene name in the SCENES custom slot before adding the scenes by voice. **Rembmer**, even if you add scenes with an app, recognition will be much better if you add the scene (and group, and light) names as values in the relevant custom slot.
