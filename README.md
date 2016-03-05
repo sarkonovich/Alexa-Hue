@@ -18,7 +18,7 @@ For information on how to set up the Lambda function, look at the instructions [
 
 (In particular, follow the steps under "Creating a Lambda Function for an Alexa Skill")
 
-Add your code as Node.js. Just copy and paste lambda_passthrough.js in the code editor.
+When you get to the step that says, "When you are ready to add your own code, edit the function and select the Code tab," you'll be copying and pasting in the text from lambda_passthrough.js. Add your code as Node.js. Just copy and paste lambda_passthrough.js in the code editor.
 
 Then in the Amazon [developer portal](https://developer.amazon.com/edw/home.html#/skills), you'll need to create a new skill.
 
@@ -27,80 +27,34 @@ Then in the Amazon [developer portal](https://developer.amazon.com/edw/home.html
 3. For "Version Number"...anything. How about 0.0.1?
 4. For "Endpoint" select 'Lambda ARN' and point it to your Lambda function by filling in the field with the proper resource name. Just go to your Lambda Function in the AWS Console. The ARN will look something like this:  arn:aws:lambda:us-east-1:123456789805:function:my_function
 5. On the next page fill in the interaction model, custom slot values, and utterance samples by copying and pasting the info from intent_schema.txt, sample_utterances.txt and custom_slots.txt onto the appropriate form fields. 
+6. Create custom slots first. In the "custom slot type" section, you'll see a button "Add Slot Type." Click on that. Add the slot name in the "Enter Type" box.  The name will be one of the all caps names from the custom_slots.txt, e.g., LIGHTS or ATTRIBUTE. Then paste in the values (they appear just below that all caps name in the custom_slots.txt), one value per line, in the "Enter Values" box. Then click  "OK."  In the end you're going to create 6 different custom slots. 
+7. Copy/paste the contents of intent_schema.txt into the "Intent Schema" box.
+8. Copy/paste the contents of utterance_samples.txt into the "Sample Utterances" box.
 
 Now, for the custom slot values "LIGHTS" and "SCENES" substitute in the appropriate values for your lights and scenes. For lights, single bulbs should be indicated by 'light' (e.g, "kitchen light") and groups with 'lights' (e.g., "living room lights.) 
 
-#####A Long Note About Scenes and Groups (you can skip this for now and come back to it after everything is set up):
-######A. (Scenes)######
-
-You can only recall scene names you can speak. Many apps store scenes on the bridge with alphanumeric codes, and then provide user friendly names in the app. Unfortunately, Alexa can't get at those scenes. However, you can create scenes with Alexa friendly names within the skill. Just set up the lights how you like and say, "Alexa, tell [invocation name] to save scene as [name]. Then, add 'name' as a SCENE custom slot value.
-
-One shortcoming of this approach is that it only creates scenes that affect all lights. The steps below allow you to create scenes that affect either all the lights, or just groups of lights.
-
-To Create Scenes:
-
-Open up a terminal window in the folder where you've stored your Alexa-Hue files (hue_switch.rb is the one we want).
-
-Type 
-
-1. ````pry```` (if you get an error here, do ````gem install pry````)
-
-2. ````require './hue_switch'````
-
-3. ````s = Hue::Switch.new````
-
-You can think of ‘s’ as a complicated light switch. It can turn on/off/change attributes/save scenes, etc. We care about saving scenes.     The simplest case is saving a scene for all the lights. To do that:
-
-4.	Set up the lights just the way you want them, in whatever app you’d like. The scene will recreate this exact state.
-
-5.	Then ````s.save_scene 'scene_name'````
-
-For example, you could do:
-
-		s.save_scene 'breakfast'
-		s.save_scene 'evening'
-
-That’s it! (One note: don’t put the word “scene” in the scene name. So the scene should be called, for example, “morning,” and not “morning scene.”
-
-Now, if you want a scene to only affect a group of lights, there’s just one extra step. First, you need to assign that group to the switch  ````s```` so that it only controls that group. To see all the groups you have, type: 
-
-    s.list_group
-
-You should get a listing of your groups. (Ignore the numbers that are associated with the names.) Let’s say you have a group called “kitchen.” To get the switch s to control just the kitchen lights, type:
-
-    s.lights 'kitchen'
-
-
-
-Now, if you type ````s.off```` or ````s.on```` you should be controlling the “kitchen” lights.)
-
-Set up the groups 'kitchen' lights however you’d like (color, saturation, brightness, etc. You can do this in an app) and repeat step 2. above. For example,
-
-     s.save_scene 'breakfast'
-
-You’re done!
-
-######B. (Groups)######
-
-Alexa Hue uses the light groups stored on the Hue Bridge. Some apps that let you create groups only store those locally, within the app and not on the bridge. This is how the Alexa app works, too. So, the groups you've created in that app exist only there and cannot be accessed by Hue Switch. 
-
-The fix is easy: just create (or re-create) the groups with an app that *does* store groups on the bridge. There are lots that do. One is called OnSwitch for Philips Hue. It's available for both iOS and Android.
-
 The program require ruby 2.0 or above, and two gems:  sinatra and hue_switch.
 
-To install ruby, I suggest using RVM. Instructions are [here.](https://rvm.io/rvm/install)
-After rvm is installed, install a recent version of ruby:
+Now you need to check that you've got a proper version of Ruby installed. In a terminal window just type
+````ruby --version````
 
+Make sure that you've got 2.0.0 or above.
+
+If you don't have Ruby installed, you'll need to install it.
+
+For Windows, just use [RubyInstaller](http://rubyinstaller.org/downloads/)
+
+For OSX or Linux, I suggest using RVM. Instructions are [here.](https://rvm.io/rvm/install)
+
+Once RVM is installed (again, only install RVM if you're not using Windows+RubyInstaller), install a recent version of ruby
 ````rvm install 2.2.0 --disable-binary````
 
+Double-check that you've got Ruby installed.
 
-Place all files in the same directory. And then type
+````ruby --version````
 
 
-````gem install sinatra````
-
-to install the sinatra web server. Then
-
+Now that you've gotten Ruby installed, create a directory that's convenient to get to (maybe on your desktop...)  Call it whatever you want. Copy all of the files from this repository into that directory. Open up a terminal window in that directory and type
 
 ````bundle install````
 
@@ -115,10 +69,10 @@ and the repeat the last step. Finally,
 
 to start the server on port 4567.
 
-Almost done!
+Whew! Almost done!
 
 You need some way to expose the server to the internets. I like to use an [ngrok](https://ngrok.com/) tunnel.
-Download the appropriate version of the program and start it up like this:
+Download the appropriate version of the program, open up a new terminal window, and start it up like this:
 
 ````./ngrok http 4567````
 
@@ -126,7 +80,7 @@ Andd you can add a bit of security by requiring basic auth credentials
 
 ````./ngrok http -auth="username:password" 4567````
 
-(For a bit more security, uncomment the application id check on line 15 of lights.rb and plug in the application id of your skill from the developer's portal.)
+(For a bit more security, uncomment the application id check on line 16 of lights.rb and plug in the application id of your skill from the developer's portal.)
 
 If using ngrok, you'll end up looking at something like this, which is the public IP address of the tunnel to your local server.
                                                                                     
@@ -143,8 +97,11 @@ If you've added some basic auth to the tunnel, use the following format to speci
 
     http://username:password@bb1bde4a.ngrok.io/lights
 
-Before you can use the skill, you'll need to give it access to your Hue bridge. Press the link button on your bridge and launch the skill (within, I think, 20 seconds or so.)
+Before you can use the skill, you'll need to give it access to your Hue bridge. Press the link button on your bridge and launch the skill (within, I think, 30 seconds or so.)
+
 If you don't do this step, Alexa will remind you.
+
+At this point the skill should be available to you. You can say things like:
 
 At this point the skill should be available to you. You can say things like:
 
@@ -163,12 +120,30 @@ At this point the skill should be available to you. You can say things like:
 
 *"Alexa, tell...start color loop on the bedside light"*
 
+*"Alexa, tell...stop color loop on the bedside light"*
+
 *"Alexa, tell...start long alert on the kitchen lights in forty five seconds"*
 
-*"Alexa, tell...stop alert"*
+####Groups and Scenes####
 
+Alexa Hue gets information about groups and scenes from your Hue Bridge. You can get information about what groups, scenes, and lights you have on the bridge just by asking. The relevant information will be sent to a card in your Alexa app:
 
-You can use the "flash" command instead of "long alert." (It's just easier to say.) It's also helpful for using your lights as a timer:
+*"Alexa, ask....what groups do I have?"*
 
-*"Alexa, tell...to flash the lights in five minutes."*
+*"Alexa, ask....what lights do I have?"*
 
+*"Alexa, launch....what are my scenes?"*
+
+There are a few things to keep in mind. First, Alexa stores groups locally, in the app, not on the bridge. So any scenes you created in the Alexa app will have to be recreated on the bridge. Second, you'll only be able to recall groups and scenes that are stored on the bridge with pronounceable names. Even when application store the scenes on the bridge, many  append alphanumeric strings to your scene and groups names --  "living room" becomes "living room 45hdjsldfk4", for example -- so you wouldn't be able to recall that just by asking.
+
+The solution is to find an app that a) stores the scene on the bridge and b) doesn't mess with the name. I recommend "All 4 Hue" available for [Android.](https://play.google.com/store/apps/details?id=de.renewahl.all4hue&hl=en), but I assume many others will work as well. (Note: the official hue app is **not** one of the them.)
+
+You can also save scenes from within the skill. Just set up the lights the way you'd like. Then you can say, for example:
+
+*"Alexa, tell....to save scene as dinner"*
+
+Or, to save the scene for just a group:
+
+*"Alexa, tell....to save scene as romantic on the kitchen lights."*
+
+NOTE: These commands will work better (Alexa's recognition of scene names) will be much better if you include the scene name in the SCENES custom slot before adding the scenes by voice. Even if you add scenes with an app, recognition will be much better if you add the scene (and group, and light) names to as values in the relevant custom slot.

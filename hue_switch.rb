@@ -23,11 +23,13 @@ module Hue
   end
 
   class Switch
-    attr_accessor :command, :lights_array, :_group, :body, :schedule_params, :schedule_ids
-    def initialize(command = "", _group = 0, &block)
+    attr_accessor :command, :lights_array, :_group, :body, :schedule_params, :schedule_ids, :groups, :scenes, :lights
+    def initialize( _group = 0)
 
       @user = "1234567890"
         begin
+
+          
           @ip = HTTParty.get("https://www.meethue.com/api/nupnp").first["internalipaddress"] rescue nil
           if @ip.nil?
             bridge = get_bridge_by_SSDP
@@ -47,32 +49,14 @@ module Hue
       authorize_user
       populate_switch
       
-      self.lights_array = []
-      self.schedule_ids = []
-      self.schedule_params = nil
-      self.command = ""
-      self._group = "0"
-      self.body = {}
-      instance_eval(&block) if block_given?
-    end
-    
-    def list_lights
-      light_list = {}
-      HTTParty.get("http://#{@ip}/api/#{@user}/lights").each { |k,v| light_list["#{v['name']}".downcase] = k }
-      light_list
-    end
-
-    def list_groups
-      group_list = {}
-      HTTParty.get("http://#{@ip}/api/#{@user}/groups").each { |k,v| group_list["#{v['name']}".downcase] = k }
-      group_list["all"] = "0"
-      group_list
-    end
-
-    def list_scenes
-      scene_list = []
-      HTTParty.get("http://#{@ip}/api/#{@user}/scenes").keys.each { |k| scene_list.push(k) }
-      scene_list
+      @lights_array = []
+      @schedule_ids = []
+      @schedule_params = nil
+      @_group = "0"
+      @body = {}
+      @groups = groups
+      @scenes = scenes
+      @lights = lights
     end
 
     def hue (numeric_value)
@@ -121,7 +105,7 @@ module Hue
       args.each { |l| self.lights_array.push @lights[l.to_s] if @lights.keys.include?(l.to_s) }
     end
 
-    def lights(group_name)
+    def group(group_name)
       self.lights_array = []
       self.body.delete(:scene)
       group = @groups[group_name.to_s]
@@ -132,7 +116,7 @@ module Hue
       clear_attributes
       self.lights_array = []
       self._group = "0"
-      self.body[:scene] = scene_name.to_s
+      self.body[:scene] = @scenes[scene_name.to_s]
     end
 
     def confirm
@@ -141,15 +125,15 @@ module Hue
     end
 
     def save_scene(scene_name)
-      scene_name.gsub!(' ','-')
       self.fade 2 if self.body[:transitiontime] == nil
       if self._group.empty?
         light_group = HTTParty.get("http://#{@ip}/api/#{@user}/groups/0")["lights"]
       else
         light_group = HTTParty.get("http://#{@ip}/api/#{@user}/groups/#{self._group}")["lights"]
       end
+      
       params = {name: scene_name, lights: light_group, transitiontime: self.body[:transitiontime]}
-      response = HTTParty.put("http://#{@ip}/api/#{@user}/scenes/#{scene_name}", :body => params.to_json)
+      response = HTTParty.put("http://#{@ip}/api/#{@user}/scenes/#{scene_name.gsub(' ','-')}", :body => params.to_json)
       confirm if response.first.keys[0] == "success"
     end
 
@@ -167,7 +151,6 @@ module Hue
       elsif self.body[:on] == false
         # turn off individual lights in the scene
         (HTTParty.get("http://#{@ip}/api/#{@user}/scenes"))[self.body[:scene]]["lights"].each do |l|
-          puts self.body
           HTTParty.put("http://#{@ip}/api/#{@user}/lights/#{l}/state", :body => (self.body).to_json)
         end
       end
@@ -187,22 +170,19 @@ module Hue
       scene_on_off if !self.body[:scene].nil? 
     end
 
-    # Parses times in words (e.g., "eight forty five") to standard HH:MM format
-
-    def schedule (string, on_or_off = :default)
-      self.body[:on] = true if on_or_off == :on
-      self.body[:on] = false if on_or_off == :off
-      set_time = set_time(string)
-      if set_time < Time.now
-        p "You've scheduled this in the past"
+    def schedule (string)
+      set_time = Time.parse(string).to_s.sub(' ', 'T').rpartition(' ').first
+      p set_time
+      if Time.parse(string) < Time.now
+        "You've set the schedule to a time in the past. Please indicate a.m. or p.m. when specifying a time."
       else
-        set_time = set_time.to_s.split(' ')[0..1].join(' ').sub(' ',"T")
         self.schedule_params = {:name=>"Hue_Switch Alarm",
                :description=>"",
                :localtime=>"#{set_time}",
                :status=>"enabled",
                :autodelete=>true
               }
+              p self.schedule_params
         if self.lights_array.any?
           lights_array.each do |l|
             self.schedule_params[:command] = {:address=>"/api/#{@user}/lights/#{l}/state", :method=>"PUT", :body=>self.body}
@@ -210,8 +190,14 @@ module Hue
         else
           self.schedule_params[:command] = {:address=>"/api/#{@user}/groups/#{self._group}/action", :method=>"PUT", :body=>self.body}
         end
+        p self.schedule_params
         self.schedule_ids.push(HTTParty.post("http://#{@ip}/api/#{@user}/schedules", :body => (self.schedule_params).to_json))
-        confirm if self.schedule_ids.flatten.last.include?("success")
+        
+        if self.schedule_ids.flatten.last.include?("success")
+          "Schedule set at #{Time.parse(set_time).strftime("%H:%M")}"
+        else
+          "Scheduling error. Schedule not set"
+        end
       end
     end
 
@@ -249,121 +235,6 @@ module Hue
       self.schedule_params = nil
     end
 
-    #The following two methods are required to use Switch with Zach Feldman's Alexa-home*
-    def wake_words
-      ["light", "lights", "scene", "seen"]
-    end
-
-    def process_command (command)
-      command.sub!("color loop", "colorloop")
-      command.sub!("too", "two")
-      command.sub!("for", "four")
-      command.sub!(/a half$/, 'thirty seconds')
-      self.voice command
-    end
-    
-    #The rest of the methods allow access to most of the Switch class functionality by supplying a single string
-
-    def voice(string)
-      self.reset
-      self.command << string
-
-      parse_voice(string)
-
-      if self.command.include?("schedule")
-        state = string.match(/off|on/)[0].to_sym rescue nil
-        self.send("schedule", *[string, state])
-      else
-        string.include?(' off') ? self.send("off") : self.send("on")
-      end 
-    end
-
-    private
-    
-    def parse_leading(methods)
-      methods.each do |l|
-        capture = (self.command.match (/\b#{l}\s\w+/)).to_s.split(' ')
-        method = capture[0]
-        value = capture[1]
-        value = value.in_numbers if value.scan(Regexp.union( (1..10).map {|k| k.in_words} ) ).any?
-        value = ((value.to_f/10.to_f)*255).to_i if (value.class == Fixnum) && (l != "fade")
-        self.send( method, value )
-      end
-    end
-
-    def parse_trailing(method)
-      all_keys = Regexp.union((@groups.keys + @lights.keys).flatten)
-      value = self.command.match(all_keys).to_s
-      self.send( method.first, value )
-    end
-
-    def parse_dynamic(methods)
-    methods.each do |d|
-        capture = (self.command.match (/\w+ #{d}\b/)).to_s.split(' ')
-        method = capture[1]
-        value = capture[0].to_sym
-        self.send( method, value )
-      end
-    end
-
-    def parse_scene(scene_name)
-      scene_name.gsub!(' ','-') if scene_name.size > 1
-      self.send("scene", scene_name)
-    end
-    
-    def parse_save_scene
-      save_scene = self.command.partition(/save (scene|seen) as /).last
-      self.send( "save_scene", save_scene)
-    end
-
-    def parse_voice(string)
-      string.gsub!('schedule ','')
-      trailing = string.split(' ') & %w[lights light]
-      leading = string.split(' ') & %w[hue brightness saturation fade color]
-      dynamic = string.split(' ') & %w[colorloop alert]
-      scene_name = string.partition(" scene").first
-
-      parse_scene(scene_name) if string.include?(" scene") && !string.include?("save")
-      parse_leading(leading) if leading.any?
-      parse_trailing(trailing) if trailing.any?
-      parse_dynamic(dynamic) if dynamic.any?
-      parse_save_scene if self.command.scan(/save (scene|seen) as/).length > 0
-    end
-
-    def numbers_to_times(numbers)
-      numbers.map!(&:in_numbers)
-      numbers.map!(&:to_s)
-      numbers.push("0") if numbers[1] == nil
-      numbers = numbers.shift + ':' + (numbers[0].to_i + numbers[1].to_i).to_s
-      numbers.gsub!(':', ':0') if numbers.split(":")[1].length < 2
-      numbers
-    end
-
-    def parse_time(string)
-      string.sub!(" noon", " twelve in the afternoon")
-      string.sub!("midnight", "twelve in the morning")
-      time_modifier = string.downcase.scan(/(evening)|(night|tonight)|(afternoon)|(pm)|(a.m.)|(am)|(p.m.)|(morning)|(today)/).flatten.compact.first
-      guess = Time.now.strftime('%H').to_i >= 12 ?  "p.m." : "a.m."
-      time_modifier = time_modifier.nil? ? guess : time_modifier
-      day_modifier = string.scan(/(tomorrow)|(next )?(monday|tuesday|wednesday|thursday|friday|saturday|sunday)/).flatten.compact.join(' ')
-      numbers_in_words = string.scan(Regexp.union((1..59).map(&:in_words)))
-      set_time = numbers_to_times(numbers_in_words)
-      set_time = Chronic.parse(day_modifier +  ' ' + set_time + ' ' + time_modifier)
-    end
-
-    def set_time(string)
-      if string.scan(/ seconds?| minutes?| hours?| days?| weeks?/).any? 
-        set_time = string.partition("in").last.strip!
-        set_time = Time.now + ChronicDuration.parse(string)
-      elsif string.scan(/\d/).any?
-        set_time = string.partition("at").last.strip!
-        set_time = Chronic.parse(set_time)
-      else
-        set_time = string.partition("at").last.strip!
-        set_time = parse_time(set_time)
-      end
-    end
-
     def authorize_user
       begin
         if HTTParty.get("http://#{@ip}/api/#{@user}/config").include?("whitelist") == false
@@ -379,9 +250,30 @@ module Hue
     def populate_switch
       @colors = {red: 65280, pink: 56100, purple: 52180, violet: 47188, blue: 46920, turquoise: 31146, green: 25500, yellow: 12750, orange: 8618}
       @mired_colors = {candle: 500, relax: 467, reading: 346, neutral: 300, concentrate: 231, energize: 136}
-      @scenes = [] ; HTTParty.get("http://#{@ip}/api/#{@user}/scenes").keys.each { |k| @scenes.push(k) }
+      @scenes = {} ; HTTParty.get("http://#{@ip}/api/#{@user}/scenes").each { |k,v| @scenes["#{v['name']}".downcase.gsub('-',' ')] = k }
       @groups = {} ; HTTParty.get("http://#{@ip}/api/#{@user}/groups").each { |k,v| @groups["#{v['name']}".downcase] = k } ; @groups["all"] = "0"
       @lights = {} ; HTTParty.get("http://#{@ip}/api/#{@user}/lights").each { |k,v| @lights["#{v['name']}".downcase] = k }
+    end
+
+    def pretty_scenes
+      string = ""
+      self.scenes.keys.each {|k| 
+        string << "#{k}\n" }
+      string
+    end
+
+    def pretty_lights
+      string = ""
+      self.lights.keys.each {|k| 
+        string << "#{k}\n" }
+      string
+    end
+
+    def pretty_groups
+      string = ""
+      self.groups.keys.each {|k| 
+        string << "#{k}\n" }
+      string
     end
 
     def get_bridge_by_SSDP

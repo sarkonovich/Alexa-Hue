@@ -1,10 +1,14 @@
 ControlLights turn the {Lights} {State}
 ControlLights turn {State} the {Lights}
 ControlLights set {Scene} scene
+ControlLights set {Scene} seen
+ControlLights set seen {Scene}
 ControlLights set scene {Scene}
+ControlLights set the seen {Scene}
 ControlLights set the scene {Scene}
 
-ControlLights schedule {Scene} scene at {Time}
+ControlLights schedule {Scene} scene at {AbsoluteTime}
+ControlLights schedule {Scene} seen at {AbsoluteTime}
 
 ControlLights turn the {Lights} {Color}
 ControlLights turn the {Lights} to {Color}
@@ -14,25 +18,27 @@ ControlLights change the {Lights} to the {Color}
 ControlLights set the {Lights} to {Color}
 ControlLights set the {Lights} to the {Color}
 
-ControlLights turn {State} the {Lights} in {Schedule}
-ControlLights turn the {Lights} {State} in {Schedule}
-ControlLights turn the {Lights} {Color} in {Schedule}
-ControlLights turn the {Lights} to {Color} in {Schedule}
-ControlLights turn the {Lights} to the {Color} in {Schedule}
-ControlLights change the {Lights} to {Color} in {Schedule}
-ControlLights change the {Lights} to the {Color} in {Schedule}
-ControlLights set the {Lights} to {Color} in {Schedule}
-ControlLights set the {Lights} to the {Color} in {Schedule}
+ControlLights turn {State} the {Lights} in {AbsoluteTime}
+ControlLights turn the {Lights} {State} in {AbsoluteTime}
+ControlLights turn the {Lights} {Color} in {AbsoluteTime}
+ControlLights turn the {Lights} to {Color} in {AbsoluteTime}
+ControlLights turn the {Lights} to the {Color} in {AbsoluteTime}
+ControlLights change the {Lights} to {Color} in {AbsoluteTime}
+ControlLights change the {Lights} to the {Color} in {AbsoluteTime}
+ControlLights set the {Lights} to {Color} in {AbsoluteTime}
+ControlLights set the {Lights} to the {Color} in {AbsoluteTime}
 
-ControlLights turn {State} the {Lights} at {Time}
-ControlLights turn the {Lights} {State} at {Time}
-ControlLights turn the {Lights} {Color} at {Time}
-ControlLights turn the {Lights} to {Color} at {Time}
-ControlLights turn the {Lights} to the {Color} at {Time}
-ControlLights change the {Lights} to {Color} at {Time}
-ControlLights change the {Lights} to the {Color} at {Time}
-ControlLights set the {Lights} to {Color} at {Time}
-ControlLights set the {Lights} to the {Color} at {Time}
+ControlLights turn {State} the {Lights} at {RelativeTime}
+ControlLights turn the {Lights} {State} at {RelativeTime}
+ControlLights turn the {Lights} {Color} at {RelativeTime}
+ControlLights turn the {Lights} to {Color} at {RelativeTime}
+ControlLights turn the {Lights} to the {Color} at {RelativeTime}
+ControlLights change the {Lights} to {Color} at {RelativeTime}
+ControlLights change the {Lights} to the {Color} at {RelativeTime}
+ControlLights set the {Lights} to {Color} at {RelativeTime}
+ControlLights set the {Lights} to the {Color} at {RelativeTime}
+ControlLights turn {State} {Lights} in {RelativeTime}
+ControlLights turn {State} {Lights} at {AbsoluteTime}
 
 ControlLights {Lights} brightness {Brightness} 
 ControlLights set the {Lights} to brightness {Brightness}
@@ -44,27 +50,42 @@ ControlLights set the {Lights} to saturation {Saturation}
 
 ControlLights set the {Lights} to the color {Color} and saturation {Saturation}
 ControlLights set the {Lights} to the color {Color} and brightness {Brightness} 
-ControlLights set the {Lights} to the color {Color} and saturation {Saturation} in {Schedule}
-ControlLights set the {Lights} to the color {Color} and brightness {Brightness} in {Schedule}
+ControlLights set the {Lights} to the color {Color} and saturation {Saturation} in {RelativeTime}
+ControlLights set the {Lights} to the color {Color} and brightness {Brightness} in {RelativeTime}
 
-ControlLights start {short alert|Start} on the {Lights}
-ControlLights start {long alert|Start} on the {Lights}
-ControlLights start {color loop|Start} on the {Lights}
-ControlLights stop {alert|Stop} on the {Lights}
-ControlLights stop {color loop|Stop} on the {Lights}
+ControlLights {start|Event} {Alert} on the {Lights}
+ControlLights {stop|Event} {Alert} on the {Lights}
+ControlLights {Alert} on the {Lights}
+ControlLights {start|Event} {Alert}
+ControlLights {stop|Event} {Alert}
 
-ControlLights {flash|Flash} {Lights}
-ControlLights {flash|Flash} {Lights} in {Schedule}
-ControlLights {flash|Flash} the {Lights}
-ControlLights {flash|Flash} the {Lights} in {Schedule}
 
 ControlLights save scene as {romantic|SaveScene}
 ControlLights save scene as {summer dawn|SaveScene}
 ControlLights save scene as {working at night|SaveScene}
 ControlLights save scene as {purple|SaveScene}
 ControlLights save scene as {midnight cave|SaveScene}
+ControlLights save scene as {patriotic|SaveScene} on {Lights}
+ControlLights save scene as {deep purple|SaveScene} on {Lights}
+ControlLights save scene as {relaxing|SaveScene} on {Lights}
+ControlLights save scene as {night time reading|SaveScene} on {Lights}
 
-ControlLights save scene as {midnight cave|SaveScene}
+ListScenes what are my scenes
+ListScenes what scenes do I have
+ListScenes give me my scenes
+ListScenes list my scenes
+
+ListGroups what are my groups
+ListGroups what groups do I have
+ListGroups give me my groups
+ListGroups list my groups
+
+ListLights what are my lights
+ListLights what lights do I have
+ListLights give me my lights
+ListLights list my lights
+
+
 
 AMAZON.StopIntent quit
 AMAZON.StopIntent stop

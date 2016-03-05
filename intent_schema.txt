@@ -9,6 +9,18 @@
       
     },
     {
+      "intent": "ListScenes",
+      "slots":[]
+    },
+    {
+      "intent": "ListGroups",
+      "slots":[]
+    },
+    {
+      "intent": "ListLights",
+      "slots":[]
+    },
+    {
       "intent": "ControlLights",
       "slots": [
         {
@@ -24,16 +36,12 @@
           "type": "LEVEL"
         },
         {
-          "name": "Start",
-          "type": "AMAZON.LITERAL"
-        },
-        {
-          "name": "Stop",
-          "type": "AMAZON.LITERAL"
-        },
-        {
           "name": "State",
           "type": "STATE"
+        },
+                {
+          "name": "Event",
+          "type": "AMAZON.LITERAL"
         },
         {
           "name": "SaveScene",
@@ -48,16 +56,16 @@
           "type": "COLOR"
         },
         {
-          "name": "Schedule",
+          "name": "RelativeTime",
           "type": "AMAZON.DURATION"
         },
         {
-          "name": "Time",
+          "name": "AbsoluteTime",
           "type": "AMAZON.TIME"
         },
-         {
-          "name": "Flash",
-          "type": "AMAZON.LITERAL"
+        {
+          "name": "Alert",
+          "type": "ALERT_TYPE"
         },
         {
           "name": "Scene",
