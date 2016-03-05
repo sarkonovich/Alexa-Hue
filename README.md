@@ -33,7 +33,9 @@ Then in the Amazon [developer portal](https://developer.amazon.com/edw/home.html
 
 Now, for the custom slot values "LIGHTS" and "SCENES" substitute in the appropriate values for your lights and scenes. For lights, single bulbs should be indicated by 'light' (e.g, "kitchen light") and groups with 'lights' (e.g., "living room lights.) 
 
-The program require ruby 2.0 or above, and two gems:  sinatra and hue_switch.
+
+
+The program requires ruby 2.0 or above, and some Ruby Gems.
 
 Now you need to check that you've got a proper version of Ruby installed. In a terminal window just type
 ````ruby --version````
