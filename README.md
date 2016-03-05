@@ -150,11 +150,15 @@ Alexa Hue gets information about groups and scenes from your Hue Bridge. You can
 
 *"Alexa, launch....what are my scenes?"*
 
-There are a few things to keep in mind. First, Alexa stores groups locally, in the app, not on the bridge. So any scenes you created in the Alexa app will have to be recreated on the bridge. Second, you'll only be able to recall groups and scenes that are stored on the bridge with pronounceable names. Even when application store the scenes on the bridge, many  append alphanumeric strings to your scene and groups names --  "living room" becomes "living room 45hdjsldfk4", for example -- so you wouldn't be able to recall that just by asking.
+There are a few things to keep in mind. First, the Alexa app stores groups locally, in the app, not on the bridge. So any scenes you created in the Alexa app will have to be recreated on the bridge. Second, you'll only be able to recall groups and scenes that are stored on the bridge with pronounceable names. Even when an application stores the scenes on the bridge, it may append alphanumeric strings to your scene and groups names --  "living room" becomes "living room on 45hdjsldfk4", for example -- so you wouldn't be able to recall that just by asking.
 
-The solution is to find an app that a) stores the scene on the bridge and b) doesn't mess with the name. I recommend "All 4 Hue" available for [Android.](https://play.google.com/store/apps/details?id=de.renewahl.all4hue&hl=en), but I assume many others will work as well. (Note: the official hue app is **not** one of the them.)
+There are two solutions.
 
-You can also save scenes from within the skill. Just set up the lights the way you'd like. Then you can say, for example:
+The first is to find an app that a) stores the scene on the bridge and b) doesn't mess with the name. I recommend "All 4 Hue" available for [Android.](https://play.google.com/store/apps/details?id=de.renewahl.all4hue&hl=en), but I assume many others will work as well. (Note: the official hue app is **not** one of the them.)
+
+Then, add the scene name as a value in the SCENES custom slot.
+
+Second is to save scenes from within the skill. Just set up the lights the way you'd like. Then you can say, for example:
 
 *"Alexa, tell....to save scene as dinner"*
 
@@ -162,7 +166,6 @@ Or, to save the scene for just a group:
 
 *"Alexa, tell....to save scene as romantic on the kitchen lights."*
 
-NOTE: I have not included lots and lots of sample utterances or custom slot values. Because of this, the voice recognition for arbitrary words will not be very good. However, the recognition for the supplied values will be very, very good. (It's a trade off.) Since you you using this to control just your lights, there's no need for the program to recognize just anything you say. 
+This method will work a lot better if you add the name of the scene you are creating to the SCENES custom slot values *before* you save the scene.
 
-
-Therefore, when saving and recalling scenes, the commands will work *much* better (Alexa's recognition of scene names) if you include the scene name in the SCENES custom slot before adding the scenes by voice. **Rembmer**, even if you add scenes with an app, recognition will be much better if you add the scene (and group, and light) names as values in the relevant custom slot.
+**Why do I have to keep adding the names of the scenes/groups in the developer's portal?** I have not included lots and lots of sample utterances or custom slot values. Because of this, the voice recognition for arbitrary words will not be very good. However, the recognition for the supplied values will be very, very good. (It's a trade off.) Since you you using this to control just your lights, there's no need for the program to recognize just anything you say. *Remember*, even if you add scenes with an app, recognition will be much better if you add the scene (and group, and light) names as values in the relevant custom slot.
