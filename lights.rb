@@ -174,8 +174,9 @@ module Sinatra
           if @echo_request.slots.savescene
             scene_name = @echo_request.slots.savescene
             switch.save_scene scene_name
+            response.end_session = true
             response.spoken_response = "Scene saved as #{scene_name}"
-            halt response. without_card.to_json
+            halt response.without_card.to_json
           
           elsif @echo_request.slots.scene
             

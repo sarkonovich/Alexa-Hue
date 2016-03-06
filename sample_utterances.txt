@@ -7,6 +7,16 @@ ControlLights set scene {Scene}
 ControlLights set the seen {Scene}
 ControlLights set the scene {Scene}
 
+ControlLights save scene as {romantic|SaveScene}
+ControlLights save scene as {summer dawn|SaveScene}
+ControlLights save scene as {working at night|SaveScene}
+ControlLights save scene as {purple|SaveScene}
+ControlLights save scene as {midnight cave|SaveScene}
+ControlLights save scene as {patriotic|SaveScene} on {Lights}
+ControlLights save scene as {deep purple|SaveScene} on {Lights}
+ControlLights save scene as {relaxing|SaveScene} on {Lights}
+ControlLights save scene as {night time reading|SaveScene} on {Lights}
+
 ControlLights schedule {Scene} scene at {AbsoluteTime}
 ControlLights schedule {Scene} seen at {AbsoluteTime}
 
@@ -64,17 +74,6 @@ ControlLights {start|Event} {Alert} on the {Lights} in {RelativeTime}
 ControlLights {start|Event} {Alert} on the {Lights} in {AbsoluteTime}
 ControlLights {stop|Event} {Alert} on the {Lights} in {RelativeTime}
 ControlLights {stop|Event} {Alert} on the {Lights} in {AbsoluteTime}
-
-
-ControlLights save scene as {romantic|SaveScene}
-ControlLights save scene as {summer dawn|SaveScene}
-ControlLights save scene as {working at night|SaveScene}
-ControlLights save scene as {purple|SaveScene}
-ControlLights save scene as {midnight cave|SaveScene}
-ControlLights save scene as {patriotic|SaveScene} on {Lights}
-ControlLights save scene as {deep purple|SaveScene} on {Lights}
-ControlLights save scene as {relaxing|SaveScene} on {Lights}
-ControlLights save scene as {night time reading|SaveScene} on {Lights}
 
 ListScenes what are my scenes
 ListScenes what scenes do I have
