@@ -83,6 +83,8 @@ module Sinatra
 
 
           if @echo_request.slots.lights
+            @echo_request.slots.lights.sub!("like", "light")
+            @echo_request.slots.lights.sub!("likes", "lights")
   				  if @echo_request.slots.lights.scan(/light|lights/).empty?
               response.end_session = false
               response.spoken_response = "Please specify which light or lights you'd like to adjust. I'm ready to control the lights."
