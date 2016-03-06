@@ -112,9 +112,9 @@ module Sinatra
       
         # Logic for light adjustments
 
-          if @echo_request.slots.lights.downcase
+          if @echo_request.slots.lights
             
-            light_name = @echo_request.slots.lights
+            light_name = @echo_request.slots.lights.downcase
             
             if light_name.partition("light").last.empty?
               switch.light light_name.sub(" light", "").strip

@@ -29,7 +29,6 @@ module Hue
       @user = "1234567890"
         begin
 
-          
           HTTParty::Basement.default_options.update(verify: false)
           @ip = HTTParty.get("https://www.meethue.com/api/nupnp").first["internalipaddress"] rescue nil
           if @ip.nil?
