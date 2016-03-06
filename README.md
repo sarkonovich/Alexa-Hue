@@ -156,9 +156,10 @@ There are two solutions.
 
 The first is to find an app that a) stores the scene on the bridge and b) doesn't mess with the name. I recommend "All 4 Hue" available for [Android.](https://play.google.com/store/apps/details?id=de.renewahl.all4hue&hl=en), but I assume many others will work as well. (Note: the official hue app is **not** one of the them.)
 
-Then, add the scene name as a value in the SCENES custom slot.
+Create a scene in an app that meets requirements a) and b) and then add the scene name as a value in the SCENES custom slot.
+(You can tell if the application stored the scene correctly on the bridge by asking the skill for your scenes, and making sure that the scene shows up with the name you expect.)
 
-Second is to save scenes from within the skill. Just set up the lights the way you'd like. Then you can say, for example:
+The second solution is to save scenes from within the skill. Just set up the lights the way you'd like. Then you can say, for example:
 
 *"Alexa, tell....to save scene as dinner"*
 
@@ -166,6 +167,10 @@ Or, to save the scene for just a group:
 
 *"Alexa, tell....to save scene as romantic on the kitchen lights."*
 
-This method will work a lot better if you add the name of the scene you are creating to the SCENES custom slot values *before* you save the scene.
+This method is probably not as reliable as the first, but it works. It will work a lot better if you add the name of the scene you are creating to the SCENES custom slot values *before* you save the scene.
 
 **Why do I have to keep adding the names of the scenes/groups in the developer's portal?** I have not included lots and lots of sample utterances or custom slot values. Because of this, the voice recognition for arbitrary words will not be very good. However, the recognition for the supplied values will be very, very good. (It's a trade off.) Since you you using this to control just your lights, there's no need for the program to recognize just anything you say. *Remember*, even if you add scenes with an app, recognition will be much better if you add the scene (and group, and light) names as values in the relevant custom slot.
+
+**Alexa keeps saying she can't find a group (light, or scene) named "Marks Room" even though I know there it exists?**  This is likely a voice recognitions problem. Look in the settings tab of the Alexa app, under history. There you can see exactly what Alexa heard for everthing you say. Perhaps she heard "Marcs room"? This shouldn't happen if you've added the name of the light/group/scene as a value in the relevant custom slot, but who knows? Alexa is not constrained to recognize only those values
+
+**Alexa keeps asking me to specify a light or lights, but I did.** Again, this is likely a recognition problem. Check that she heard what you correctly. For example, she might be hearing "recipe like" instead of "recipe light." I've taken care of a couple common mistakes in the app (you can say "turn on the bedroom like" and it will still work), but there might be others. In the history section of the app you can give feedback and tell Alexa that she misheard. If you do this a few times, she usually corrects the error.

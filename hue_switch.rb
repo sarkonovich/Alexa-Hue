@@ -71,8 +71,11 @@ module Hue
 
     def color(color_name)
       clear_attributes
-      if @colors.keys.include?(color_name.to_sym)
-        self.body[:hue] = @colors[color_name.to_sym]
+      if @colors.keys.include?(color_name.split(' ').last.to_sym)
+        self.body[:hue] = @colors[color_name.split(' ').last.to_sym]
+        self.body[:sat] = 220
+        self.body[:sat] = 255 if color_name.split(' ').first == "dark"
+        self.body[:sat] = 195 if color_name.split(' ').first == "light"
       else
         self.body[:ct] = @mired_colors[color_name.to_sym]
       end

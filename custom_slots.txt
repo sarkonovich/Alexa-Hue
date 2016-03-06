@@ -9,14 +9,30 @@ Saturation
 Brightness
 
 COLOR
+Light Red
 Red
+Dark Red
+Light Blue
 Blue
+Dark Blue
+Light Green
 Green
+Dark Green
+Light Yellow
 Yellow
+Dark Yellow
+Light Pink
 Pink
+Dark Pink
+Light Purple
 Purple
+Dark Purple
+Light Violet
 Violet
+Dark Violet
+Light Turquoise
 Turquiose
+Dark Turquoise
 Reading
 Relax
 Candle
