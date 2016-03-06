@@ -197,7 +197,7 @@ module Sinatra
               switch.on
               response.end_session = true
               response.spoken_response = "Setting #{scene_name} scene"
-              halt response. without_card.to_json
+              halt response.without_card.to_json
             end
           end
             
