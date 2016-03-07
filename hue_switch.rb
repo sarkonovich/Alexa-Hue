@@ -262,21 +262,21 @@ module Hue
       string = ""
       self.scenes.keys.each {|k| 
         string << "#{k}\n" }
-      string
+      string.split(/\n/).sort.join("\n")
     end
 
     def pretty_lights
       string = ""
       self.lights.keys.each {|k| 
         string << "#{k}\n" }
-      string
+      string.split(/\n/).sort.join("\n")
     end
 
     def pretty_groups
       string = ""
       self.groups.keys.each {|k| 
         string << "#{k}\n" }
-      string
+      string.split(/\n/).sort.join("\n")
     end
 
     def get_bridge_by_SSDP
