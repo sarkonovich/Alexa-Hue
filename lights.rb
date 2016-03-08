@@ -95,13 +95,25 @@ module Sinatra
   				# Check that a name for and existing light or group was specified
           if @echo_request.slots.lights
             if @echo_request.slots.lights.include?('lights')
+              if @echo_request.slots.lights == "lights"
+                @echo_request.slots.lights = "all lights"
+              end
+              
               if !(switch.groups.keys.join(', ').downcase.include?("#{@echo_request.slots.lights.downcase.sub(' lights','')}"))
                 response.spoken_response = "I couldn't find a group with the name #{@echo_request.slots.lights.delete('lights')}"
                 response.end_session = false
                 halt response.without_card.to_json
               end
             elsif  @echo_request.slots.lights.include?('light')
-              if  !(switch.lights.keys.join(', ').downcase.include?("#{@echo_request.slots.lights.downcase.sub(' light','')}"))
+              if @echo_request.slots.lights == "light"
+                if switch.lights.keys.size == 1
+                  @echo_request.slots.lights = switch.lights.keys.first
+                else
+                  response.spoken_response = "Please specify a light to adjust."
+                  response.end_session = false
+                  halt response.without_card.to_json
+                end
+              elsif !(switch.lights.keys.join(', ').downcase.include?("#{@echo_request.slots.lights.downcase.sub(' light','')}"))
                 response.spoken_response = "I couldn't find a light with the name #{@echo_request.slots.lights.delete('lights')}"
                 response.end_session = false
                 halt response.without_card.to_json
