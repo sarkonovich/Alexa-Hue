@@ -59,6 +59,10 @@ module Hue
       @lights = lights
     end
 
+    def time_on_bridge
+      HTTParty.get("http://#{@ip}/api/#{@user}/config")["localtime"]
+    end
+
     def hue (numeric_value)
       clear_attributes
       self.body[:hue] = numeric_value

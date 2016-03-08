@@ -119,9 +119,9 @@ If you don't do this step, Alexa will remind you.
 
 At this point the skill should be available to you. You can say things like:
 
-At this point the skill should be available to you. You can say things like:
-
 *"Alexa, tell [whatever invocation name you chose] to turn the kitchen lights blue."*
+
+*"Alexa, tell [whatever invocation name you chose] to turn the bedroom lights dark red."*
 
 *"Alexa, tell...set the floor light to saturation ten and brightness five"*
 
@@ -132,6 +132,7 @@ At this point the skill should be available to you. You can say things like:
 *"Alexa, tell...turn off the bedroom lights in 5 minutes"*
 
 *"Alexa, tell...turn on the lights at eight forty five p.m."*
+
 *"Alexa, tell...set dinner scene in one hour"*
 
 *"Alexa, tell...start color loop on the bedside light"*
@@ -139,6 +140,8 @@ At this point the skill should be available to you. You can say things like:
 *"Alexa, tell...stop color loop on the bedside light"*
 
 *"Alexa, tell...start long alert on the kitchen lights in forty five seconds"*
+
+Preprogrammed colors include pink, orange, green, red, turqoise, blue, purple, and violet. All these colors accept the modifiers "dark" and "light" (e.g., "dark blue", "light pink."). You can also specify the following mired colors: candle, relax, reading, neutral, concentrate, and energize. You can add your own colors, or adjust the values of the existing ones, by editing lines 254 and 255 of hue.switch.rb
 
 ####Groups and Scenes####
 

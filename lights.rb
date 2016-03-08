@@ -203,10 +203,10 @@ module Sinatra
             
           if @echo_request.slots.absolutetime || @echo_request.slots.relativetime
             if @echo_request.slots.absolutetime
-              time = Time.parse(@echo_request.slots.absolutetime).to_s.sub(' ', 'T').rpartition(' ').first
+              time = Time.parse(@echo_request.slots.absolutetime).iso8601
             elsif @echo_request.slots.relativetime
               adder = ChronicDuration.parse(@echo_request.slots.relativetime)
-              time = Time.now + adder
+              time = Time.parse(switch.time_on_bridge) + adder
             end
 
             if @echo_request.slots.state
