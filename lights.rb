@@ -100,7 +100,7 @@ module Sinatra
               end
               
               if !(switch.groups.keys.join(', ').downcase.include?("#{@echo_request.slots.lights.downcase.sub(' lights','')}"))
-                response.spoken_response = "I couldn't find a group with the name #{@echo_request.slots.lights.delete('lights')}"
+                response.spoken_response = "I couldn't find a group with the name #{@echo_request.slots.lights.sub(' lights','')}"
                 response.end_session = false
                 halt response.without_card.to_json
               end
@@ -114,7 +114,7 @@ module Sinatra
                   halt response.without_card.to_json
                 end
               elsif !(switch.lights.keys.join(', ').downcase.include?("#{@echo_request.slots.lights.downcase.sub(' light','')}"))
-                response.spoken_response = "I couldn't find a light with the name #{@echo_request.slots.lights.delete('lights')}"
+                response.spoken_response = "I couldn't find a light with the name #{@echo_request.slots.lights.sub(' light','')}"
                 response.end_session = false
                 halt response.without_card.to_json
               end
