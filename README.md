@@ -64,7 +64,8 @@ to install the needed gems. If you don't already have bundler installed (and you
 
 ````gem install bundler````
 
-and the repeat the last step. Finally, 
+and the repeat the last step. If you get the message ````(Errno::EACCESS) Permission Denied```` error, look below. DON'T USE sudo
+to avoid it! Finally, 
 
 
 ````ruby app.rb````
@@ -76,12 +77,17 @@ to start the server on port 4567.
 Here are some possible errors you might get at this point
 
 1. *Syntax Errors in alexa_objects.rb.* 
-You dont' have ruby 2.0 or above installed, or are not using it to run the prograam Make sure you're actually *using* the version you installed with rvm. Type ````rvm use 2.0```` (or whatever version you installed) in the terminal window and start up the server (````ruby app.rb````) again.
+You dont' have ruby 2.0 or above installed, or are not using it to run the program Make sure you're actually *using* the version you installed with rvm. Type ````rvm use 2.0```` (or whatever version you installed) in the terminal window and start up the server (````ruby app.rb````) again.
 
 2. *You get an RVM is not a function error*. You didn't install rvm correctly, maybe you used sudo to do the install. Type
 ````/bin/bash --login```` in the terminal window and then try to startup the server again.
 
 3. *You get a message that required gems are missing.* If ````bundle install```` completed successfully and you're getting this message, the gems are not installed in the directory the program  is looking at. You can type ````gem list```` to see the available gems. The solution here is probably the same as in step one. ````rvm use 2.0```` (or whatever version you installed) and try again to start the server. That should work.
+
+4. *You can a (Errno::EACCESS) Permission Denied error. The same solution as in 1. 
+Type ````rvm use 2.0```` (or whatever version you installed) in the terminal
+
+If you now get a message like error 2, just use the solution that's in 2.
 
 Whew! Almost done!
 
