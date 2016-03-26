@@ -35,9 +35,12 @@ Turquiose
 Dark Turquoise
 Reading
 Relax
+Relaxing
 Candle
 Neutral
 Concentrate
+Energize
+Energizing
 
 LEVEL
 one

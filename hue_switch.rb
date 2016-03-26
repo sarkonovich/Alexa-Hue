@@ -256,7 +256,7 @@ module Hue
 
     def populate_switch
       @colors = {red: 65280, pink: 56100, purple: 52180, violet: 47188, blue: 46920, turquoise: 31146, green: 25500, yellow: 12750, orange: 8618}
-      @mired_colors = {candle: 500, relax: 467, reading: 346, neutral: 300, concentrate: 231, energize: 136}
+     @mired_colors = {candle: 500, relax: 467, relaxing: 467, reading: 346, neutral: 300, concentrate: 231, energize: 136, energizing: 136}
       @scenes = {} ; HTTParty.get("http://#{@ip}/api/#{@user}/scenes").each { |k,v| @scenes["#{v['name']}".downcase.gsub('-',' ')] = k }
       @groups = {} ; HTTParty.get("http://#{@ip}/api/#{@user}/groups").each { |k,v| @groups["#{v['name']}".downcase] = k } ; @groups["all"] = "0"
       @lights = {} ; HTTParty.get("http://#{@ip}/api/#{@user}/lights").each { |k,v| @lights["#{v['name']}".downcase] = k }
