@@ -7,6 +7,12 @@ ControlLights set scene {Scene}
 ControlLights set the seen {Scene}
 ControlLights set the scene {Scene}
 
+ControlLights for {Scene} seen
+ControlLights for the scene {Scene}
+ControlLights for {Color} {Lights}
+ControlLights for a {Color} {Lights}
+ControlLights {Color} {Lights}
+
 ControlLights save scene as {romantic|SaveScene}
 ControlLights save scene as {summer dawn|SaveScene}
 ControlLights save scene as {working at night|SaveScene}

@@ -193,6 +193,7 @@ module Sinatra
           elsif @echo_request.slots.scene
             
             scene_name = @echo_request.slots.scene.downcase
+            scene_name.sub!(" seen", " scene")
             
             if switch.scenes.keys.include?(scene_name)
               switch.scene scene_name

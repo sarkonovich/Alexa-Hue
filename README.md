@@ -127,6 +127,16 @@ At this point the skill should be available to you. You can say things like:
 
 *"Alexa, tell [whatever invocation name you chose] to turn the kitchen lights blue."*
 
+*"Alexa, ask [whatever invocation name you chose] for blue kitchen lights."*
+
+*"Alexa, ask [whatever invocation name you chose] for a dark red bedside light."*
+
+*"Alexa, ask [whatever invocation name you chose] to set romantic scene."*
+
+*"Alexa, ask [whatever invocation name you chose] for romantic scene."*
+
+*"Alexa, ask [whatever invocation name you chose] for a green bedside light."*
+
 *"Alexa, tell [whatever invocation name you chose] to turn the bedroom lights dark red."*
 
 *"Alexa, tell...set the floor light to saturation ten and brightness five"*
