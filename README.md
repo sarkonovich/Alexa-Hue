@@ -7,20 +7,20 @@ Well, you already can turn them on and off and dim them with Alexa. But this Ale
 Demo here: https://youtu.be/JBZlaAQtOXQ
 
 
-Since Amazon does not give 3rd party developers a way to access your local network, we need a bit of a workaround. This skill has two components:
+Since Amazon does not give 3rd party developers a way to access your local network, we need a bit of a workaround. This skill has three components:
 
-1. An Amazon Alexa Lambda function -- thanks to [Matt Kruse](https://forums.developer.amazon.com/forums/profile.jspa?userID=13686) -- on AWS that just passes the Alexa request onto...
-2. A server on your local network that does have access your Hue Bridge.
 
-To deploy the Lambda function, you'll need to set up a developer account at the [developer portal.](https://developer.amazon.com/home.html)
+1. An Alexa "skill" that you set up in the Amazon Developer's portal.
+2. An Amazon Alexa Lambda function -- thanks to [Matt Kruse](https://forums.developer.amazon.com/forums/profile.jspa?userID=13686) -- on AWS that just passes your skill requests onto...
+3. A server on your local network that does have access your Hue Bridge.
 
-For information on how to set up the Lambda function, look at the instructions [here.](https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/developing-an-alexa-skill-as-a-lambda-function)
+*Please note that Alexa-Hue requires a server running all the time (or all the time you want to control your lights with Alexa.)*
 
-(In particular, follow the steps under "Creating a Lambda Function for an Alexa Skill")
+To set up the skill and deploy the Lambda function, you'll need to set up a developer account at the [developer portal.](https://developer.amazon.com/home.html)
 
-When you get to the step that says, "When you are ready to add your own code, edit the function and select the Code tab," you'll be copying and pasting in the text from lambda_passthrough.js. Add your code as Node.js. Just copy and paste lambda_passthrough.js in the code editor.
+######Creating the Skill
 
-Then in the Amazon [developer portal](https://developer.amazon.com/edw/home.html#/skills), you'll need to create a new skill.
+To create your new skill, go to the [Amazon developer portal](https://developer.amazon.com/edw/home.html#/skills), and click on the "Add New Skill" button, up there in the top right.
 
 1. For "Name" pick anything you want.
 2. For "Invocation Name" pick anything you want. This is the name you'll use to open the skill (e.g., "Alexa, tell house lighting to....")
@@ -33,91 +33,51 @@ Then in the Amazon [developer portal](https://developer.amazon.com/edw/home.html
 
 Now, for the custom slot values "LIGHTS" and "SCENES" substitute in the appropriate values for your lights and scenes. For lights, single bulbs should be indicated by 'light' (e.g, "kitchen light") and groups with 'lights' (e.g., "living room lights.) 
 
+######Creating the Lambda Function
+For information on how to set up the Lambda function, look at the instructions [here.](https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/developing-an-alexa-skill-as-a-lambda-function)
+
+(In particular, follow the steps under "Creating a Lambda Function for an Alexa Skill")
+
+When you get to the step that says, "When you are ready to add your own code, edit the function and select the Code tab," you'll be copying and pasting in the text from lambda_passthrough.js. Add your code as Node.js. Just copy and paste lambda_passthrough.js in the code editor.
+
+######Installing the Server
+If you're running your server on Windows or OSX, the easiest way to get the server up and running is with a Docker containter. (Thanks to [jpeffer](https://hub.docker.com/r/jpeffer/docker-alexa-hue/) for this!) The container includes the correct version of Ruby and everything required to get the server talking to your skill.
+
+*If you're running the server on a Raspberry Pi getting Docker up an running is a bit trickier. I think it's probably just as easy to set up the server yourself. I've written some instructions for doing that [here](server_installation.md).*
+
+Docker Setup
+
+Install [Docker Toolbox](https://www.docker.com/products/docker-toolbox)
+
+-- The default installation settings most likely adequate.
+
+-- Select "Yes" if prompted to install additional drivers.
+
+Open Docker Quickstart Terminal
+
+-- Again, select "Yes" if prompted
+
+Run the following commands in the Docker CLI terminal
+
+````docker run -itdP --name=docker-alexa-hue jpeffer/docker-alexa-hue````
+
+````docker run --rm -it --link docker-alexa-hue wernight/ngrok ngrok http docker-alexa-hue:4567````
 
 
-The program requires ruby 2.0 or above, and some Ruby Gems.
+You should be looking at something like this, which is the public IP address of the tunnel to your local server.
 
-First, check that you've got a proper version of Ruby installed. In a terminal window just type
-````ruby --version````
+````Forwarding  http://2a52d01e.ngrok.io -> docker-alexa-hue:4567````
 
-Make sure that you've got 2.0.0 or above.
+````Forwarding  https://2a52d01e.ngrok.io -> docker-alexa-hue:4567````
 
-If you don't have Ruby installed, you'll need to install it.
+Head back to the lambda function on aws and replace the application_id and url with the application_id of your skill (found in the developer portal) and the ip address of your server (e.g., the ip address of your ngrok tunnel.) So, line 9 (or so) of the Lambda function might look something like this:
 
-For Windows, just use [RubyInstaller](http://rubyinstaller.org/downloads/)
+```` 'amzn1.echo-sdk-ams.app.3be28e92-xxxx-xxxx-xxxx-xxxxxxxxxxxx':'http://2a52d01e.ngrok.io/lights' ````
 
-For OSX or Linux, I suggest using RVM. Instructions are [here.](https://rvm.io/rvm/install)
-
-Once RVM is installed (again, only install RVM if you're not using Windows+RubyInstaller), install a recent version of ruby
-````rvm install 2.2.0 --disable-binary````
-
-Double-check that you've got Ruby installed.
-
-````ruby --version````
+(Don't forget to at ' /lights ' to the end of the URL)
 
 
-Now that you've gotten Ruby installed, create a directory that's convenient to get to (maybe on your desktop...)  Call it whatever you want. Copy all of the files from this repository into that directory. Open up a terminal window in that directory and type
-
-````bundle install````
-
-to install the needed gems. If you don't already have bundler installed (and you get errors on the last step) you might need to
-
-````gem install bundler````
-
-and the repeat the last step. If you get the message ````(Errno::EACCESS) Permission Denied```` error, look below. DON'T USE sudo
-to avoid it! Finally, 
-
-
-````ruby app.rb````
-
-to start the server on port 4567.
-
-######Troubleshooting######
-
-Here are some possible errors you might get at this point
-
-1. *Syntax Errors in alexa_objects.rb.* 
-You dont' have ruby 2.0 or above installed, or are not using it to run the program Make sure you're actually *using* the version you installed with rvm. Type ````rvm use 2.0```` (or whatever version you installed) in the terminal window and start up the server (````ruby app.rb````) again.
-
-2. *You get an RVM is not a function error*. You didn't install rvm correctly, maybe you used sudo to do the install. Type
-````/bin/bash --login```` in the terminal window and then try to startup the server again.
-
-3. *You get a message that required gems are missing.* If ````bundle install```` completed successfully and you're getting this message, the gems are not installed in the directory the program  is looking at. You can type ````gem list```` to see the available gems. The solution here is probably the same as in step one. ````rvm use 2.0```` (or whatever version you installed) and try again to start the server. That should work.
-
-4. *You can a (Errno::EACCESS) Permission Denied error. The same solution as in 1. 
-Type ````rvm use 2.0```` (or whatever version you installed) in the terminal
-
-If you now get a message like error 2, just use the solution that's in 2.
-
-Whew! Almost done!
-
-#####NGROK#####
-
-You need some way to expose the server to the internets. I like to use an [ngrok](https://ngrok.com/) tunnel.
-Download the appropriate version of the program, open up a **new** terminal window, and start it up like this:
-
-````./ngrok http 4567````
-
-Andd you can add a bit of security by requiring basic auth credentials
-
-````./ngrok http -auth="username:password" 4567````
-
-(For a bit more security, uncomment the application id check on line 16 of lights.rb and plug in the application id of your skill from the developer's portal.)
-
-If using ngrok, you'll end up looking at something like this, which is the public IP address of the tunnel to your local server.
-                                                                                    
-````Forwarding  http://bb1bde4a.ngrok.io -> localhost:4567````                                                                  
-   
-Finally, head back to the lambda function on aws and replace the application_id and url with the application_id of your skill (found in the developer portal) and the ip address of your server (e.g., the ip address of your ngrok tunnel.) So, line 9 (or so) of the Lambda function might look something like this:
-
-```` 'amzn1.echo-sdk-ams.app.3be28e92-xxxx-xxxx-xxxx-xxxxxxxxxxxx':'http://username:password@bb1bde4a.ngrok.io/lights' ````
-
-(If you end up using this alot, it would probably make sense to pay ngrok $5 and get a reserved address for you tunnel. That way you won't have to change the lambda function everytime you restart the ngrok tunnel.)
-
-
-If you've added some basic auth to the tunnel, use the following format to specify the route to your local server in the lambda function:
-
-    http://username:password@bb1bde4a.ngrok.io/lights
+######Almost done!!!!
 
 Before you can use the skill, you'll need to give it access to your Hue bridge. Press the link button on your bridge and launch the skill (within, I think, 30 seconds or so.)
 
