@@ -57,9 +57,11 @@ Open Docker Quickstart Terminal
 
 -- Again, select "Yes" if prompted
 
-Run the following commands in the Docker CLI terminal
+Run the following two commands in the Docker CLI terminal. First: 
 
-````docker run -itdP --name=docker-alexa-hue jpeffer/docker-alexa-hue````
+````docker run -e "TZ=America/New_York" -itdP --name=docker-alexa-hue jpeffer/docker-alexa-hue````
+
+(You'll have to replace the TZ parameter with the appropriate value. There's a partial list of US TZ names at the bottom of this Readme.)
 
 ````docker run --rm -it --link docker-alexa-hue wernight/ngrok ngrok http docker-alexa-hue:4567````
 
@@ -153,3 +155,45 @@ This method is probably not as reliable as the first, but it works. It will work
 **Alexa keeps saying she can't find a group (light, or scene) named "Marks Room" even though I know there it exists?**  This is likely a voice recognitions problem. Look in the settings tab of the Alexa app, under history. There you can see exactly what Alexa heard for everthing you say. Perhaps she heard "Marcs room"? This shouldn't happen if you've added the name of the light/group/scene as a value in the relevant custom slot, but who knows? Alexa is not constrained to recognize only those values
 
 **Alexa keeps asking me to specify a light or lights, but I did.** Again, this is likely a recognition problem. Check that she heard what you correctly. For example, she might be hearing "recipe like" instead of "recipe light." I've taken care of a couple common mistakes in the app (you can say "turn on the bedroom like" and it will still work), but there might be others. In the history section of the app you can give feedback and tell Alexa that she misheard. If you do this a few times, she usually corrects the error.
+
+====================
+Some Common TZ Codes
+
+
+For the Docker installation, you need to replace the value of the "TZ=" parameter with the time zone name that matches your location. For example ````TZ=America/Los_Angeles````
+
+More complete information [here](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)
+
+America/New_York
+
+America/Chicago
+
+America/Denver
+
+America/Los_Angeles
+
+America/Phoenix
+
+America/Indiana/Indianapolis
+
+America/Indiana/Tell_City
+
+America/Indiana/Petersburg
+
+America/Indiana/Knox
+
+America/Indiana/Winamac
+
+America/Indiana/Vevay
+
+America/Kentucky/Louisville
+
+America/Kentucky/Monticello
+
+America/Detroit
+
+America/Menominee
+
+America/Anchorage
+
+Pacific/Honolulu
