@@ -18,10 +18,10 @@ module Sinatra
         response = AlexaObjects::Response.new
         begin
           switch ||= Hue::Switch.new
-        rescue RuntimeError
+        rescue RuntimeError, NoMethodError
           response.end_session = true
           response.spoken_response = "Hello. Before using Hue lighting, you'll need to give me access to your Hue bridge." +
-                              " Please press the link button on your bridge and launch the skill again within ten seconds."
+                              " Please press the link button on your bridge and launch the skill again within twenty seconds."
           halt response.without_card.to_json
         end
 
