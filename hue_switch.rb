@@ -26,7 +26,7 @@ module Hue
     attr_accessor :command, :lights_array, :_group, :body, :schedule_params, :schedule_ids, :groups, :scenes, :lights
     def initialize( _group = 0)
 
-      @user = "1234567890"
+      @user = File.read("alexa_hue_user") rescue nil
         begin
 
           HTTParty::Basement.default_options.update(verify: false)
@@ -245,9 +245,15 @@ module Hue
     def authorize_user
       begin
         if HTTParty.get("http://#{@ip}/api/#{@user}/config").include?("whitelist") == false
-          body = {:devicetype => "Hue_Switch", :username=>"1234567890"}
+          body = {:devicetype => "Hue_Switch"}
           create_user = HTTParty.post("http://#{@ip}/api", :body => body.to_json)
-          puts "You need to press the link button on the bridge and run again" if create_user.first.include?("error")
+          if create_user.first.include?("error")
+            raise "You need to press the link button on the bridge and run again"
+          elsif create_user.first.include?("success")
+            new_user = create_user.first["success"]["username"]
+            @user = new_user
+            File.write("alexa_hue_user","#{new_user}")
+          end
         end
       rescue Errno::ECONNREFUSED
         puts "Cannot Reach Bridge"
