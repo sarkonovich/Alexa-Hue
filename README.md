@@ -59,7 +59,7 @@ Open Docker Quickstart Terminal
 
 Run the following two commands in the Docker CLI terminal. First: 
 
-````docker run -e "TZ=America/New_York" -itdP --name=docker-alexa-hue jpeffer/docker-alexa-hue````
+````docker run -e "TZ=America/New_York" -itdP --name=docker-alexa-hue sarkonovich/docker-alexa-hue````
 
 (You'll have to replace the TZ parameter with the appropriate value. There's a partial list of US TZ names at the bottom of this Readme.)
 
