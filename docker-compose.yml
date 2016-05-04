@@ -1,0 +1,16 @@
+---
+ngrok:
+  image: 'wernight/ngrok'
+  restart: always
+  command: ngrok http docker-alexa-hue:4567 -log stdout -log-level debug
+  links:
+    - docker-alexa-hue
+  container_name: docker-ngrok
+docker-alexa-hue:
+  image: 'sarkonovich/docker-alexa-hue'
+  restart: always
+#  ports:
+#    - '4567:4567'
+  environment:
+    TZ: America/Chicago
+  container_name: docker-alexa-hue

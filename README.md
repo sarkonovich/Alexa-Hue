@@ -59,12 +59,19 @@ Open Docker Quickstart Terminal
 
 Run the following two commands in the Docker CLI terminal. First: 
 
-````docker run -e "TZ=America/New_York" -itdP --name=docker-alexa-hue sarkonovich/docker-alexa-hue````
+````docker run -e "TZ=America/New_York" -itdP --name=docker-alexa-hue jpeffer/docker-alexa-hue````
+
+In case you are using a RaspberryPi (armhf), run the following command:
+
+````docker run -e "TZ=America/New_York" -itdP --name=docker-alexa-hue eschizoid/docker-alexa-hue:armhf````
 
 (You'll have to replace the TZ parameter with the appropriate value. There's a partial list of US TZ names at the bottom of this Readme.)
 
 ````docker run --rm -it --link docker-alexa-hue wernight/ngrok ngrok http docker-alexa-hue:4567````
 
+Again, the equivalent command for a RaspberryPi would be:
+
+````docker run --rm -it --link docker-alexa-hue eschizoid/ngrok:armhf ngrok http docker-alexa-hue:4567````
 
 You should be looking at something like this, which is the public IP address of the tunnel to your local server.
 
