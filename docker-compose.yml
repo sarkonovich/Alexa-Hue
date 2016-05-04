@@ -9,8 +9,8 @@ ngrok:
 docker-alexa-hue:
   image: 'sarkonovich/docker-alexa-hue'
   restart: always
-  ports:
-    - '4567:4567'
+#  ports:
+#    - '4567:4567'
   environment:
     TZ: America/Chicago
   container_name: docker-alexa-hue
