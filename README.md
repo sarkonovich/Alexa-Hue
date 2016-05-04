@@ -41,13 +41,13 @@ For information on how to set up the Lambda function, look at the instructions [
 When you get to the step that says, "When you are ready to add your own code, edit the function and select the Code tab," you'll be copying and pasting in the text from lambda_passthrough.js. Add your code as Node.js. Just copy and paste lambda_passthrough.js in the code editor.
 
 ######Installing the Server
-If you're running your server on Windows or OSX, the easiest way to get the server up and running is with a Docker containter. (Thanks to [jpeffer](https://hub.docker.com/r/jpeffer/docker-alexa-hue/) for this!) The container includes the correct version of Ruby and everything required to get the server talking to your skill.
+There are two ways to set this up. Perhaps the the easiest way to get the server up and running is with a Docker containter. (Thanks to [jpeffer](https://hub.docker.com/r/jpeffer/docker-alexa-hue/) for the work onWindows and OSX! Thanks to [eschizoid](https://github.com/eschizoid) for the RaspberryPi build.) The container includes the correct version of Ruby and everything required to get the server talking to your skill.
 
-*If you're running the server on a Raspberry Pi getting Docker up an running is a bit trickier. I think it's probably just as easy to set up the server yourself. I've written some instructions for doing that [here](server_installation.md).*
+*You can also set everything else manually, skipping the Docker installation. I've written some instructions for doing that [here](server_installation.md).*
 
 Docker Setup
 
-Install [Docker Toolbox](https://www.docker.com/products/docker-toolbox)
+Install the correct version of [Docker Toolbox](https://www.docker.com/products/docker-toolbox) for your OS.
 
 -- The default installation settings most likely adequate.
 
@@ -59,7 +59,7 @@ Open Docker Quickstart Terminal
 
 Run the following two commands in the Docker CLI terminal. First: 
 
-````docker run -e "TZ=America/New_York" -itdP --name=docker-alexa-hue jpeffer/docker-alexa-hue````
+````docker run -e "TZ=America/New_York" -itdP --name=docker-alexa-hue sarkonovich/docker-alexa-hue````
 
 In case you are using a RaspberryPi (armhf), run the following command:
 
