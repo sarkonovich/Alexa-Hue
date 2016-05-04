@@ -73,7 +73,7 @@ Then (Windows and OSX):
 
 Again, the equivalent command for a RaspberryPi would be:
 
-````docker run --rm -it --link docker-alexa-hue eschizoid/ngrok-armhf ngrok http docker-alexa-hue:4567````
+````docker run --rm -it --link docker-alexa-hue eschizoid/docker-ngrok-armhf ngrok http docker-alexa-hue:4567````
 
 You should be looking at something like this, which is the public IP address of the tunnel to your local server.
 
