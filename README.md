@@ -57,15 +57,17 @@ Open Docker Quickstart Terminal
 
 -- Again, select "Yes" if prompted
 
-Run the following two commands in the Docker CLI terminal. First: 
+Run the following two commands in the Docker CLI terminal. On Windows and OSX, first run:
 
 ````docker run -e "TZ=America/New_York" -itdP --name=docker-alexa-hue sarkonovich/docker-alexa-hue````
 
 In case you are using a RaspberryPi (armhf), run the following command:
 
-````docker run -e "TZ=America/New_York" -itdP --name=docker-alexa-hue eschizoid/docker-alexa-hue:armhf````
+````docker run -e "TZ=America/New_York" -itdP --name=docker-alexa-hue eschizoid/docker-alexa-hue-armhf````
 
 (You'll have to replace the TZ parameter with the appropriate value. There's a partial list of US TZ names at the bottom of this Readme.)
+
+Then (Windows and OSX):
 
 ````docker run --rm -it --link docker-alexa-hue wernight/ngrok ngrok http docker-alexa-hue:4567````
 
