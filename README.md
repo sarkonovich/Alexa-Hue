@@ -6,7 +6,6 @@ Well, you already can turn them on and off and dim them with Alexa. But this Ale
 
 Demo here: https://youtu.be/JBZlaAQtOXQ
 
-
 Since Amazon does not give 3rd party developers a way to access your local network, we need a bit of a workaround. This skill has three components:
 
 
@@ -22,16 +21,19 @@ To set up the skill and deploy the Lambda function, you'll need to set up a deve
 
 To create your new skill, go to the [Amazon developer portal](https://developer.amazon.com/edw/home.html#/skills), and click on the "Add New Skill" button, up there in the top right.
 
-1. For "Name" pick anything you want.
-2. For "Invocation Name" pick anything you want. This is the name you'll use to open the skill (e.g., "Alexa, tell house lighting to....")
-3. For "Version Number"...anything. How about 0.0.1?
-4. For "Endpoint" select 'Lambda ARN' and point it to your Lambda function by filling in the field with the proper resource name. Just go to your Lambda Function in the AWS Console. The ARN will look something like this:  arn:aws:lambda:us-east-1:123456789805:function:my_function
-5. On the next page fill in the interaction model, custom slot values, and utterance samples by copying and pasting the info from intent_schema.txt, sample_utterances.txt and custom_slots.txt onto the appropriate form fields. 
-6. Create custom slots first. In the "custom slot type" section, you'll see a button "Add Slot Type." Click on that. Add the slot name in the "Enter Type" box.  The name will be one of the all caps names from the custom_slots.txt, e.g., LIGHTS or ATTRIBUTE. Then paste in the values (they appear just below that all caps name in the custom_slots.txt), one value per line, in the "Enter Values" box. Then click  "OK."  In the end you're going to create 7 different custom slots. 
-7. Copy/paste the contents of intent_schema.txt into the "Intent Schema" box.
-8. Copy/paste the contents of utterance_samples.txt into the "Sample Utterances" box.
+1. For "Skill Type" just leave the default "Custom Interaction "Model"
+2. For "Name" pick anything you want.
+3. For "Invocation Name" pick anything you want. This is the name you'll use to open the skill (e.g., "Alexa, tell house lighting to....")
+4. For "Version Number"...anything. How about 0.0.1?
+5. For "Endpoint" select 'Lambda ARN' and point it to your Lambda function by filling in the field with the proper resource name. Just go to your Lambda Function in the AWS Console. The ARN will look something like this:  arn:aws:lambda:us-east-1:123456789805:function:my_function
+6. On the next page fill in the interaction model, custom slot values, and utterance samples by copying and pasting the info from intent_schema.txt, sample_utterances.txt and custom_slots.txt onto the appropriate form fields. 
+7. Create custom slots first. In the "custom slot type" section, you'll see a button "Add Slot Type." Click on that. Add the slot name in the "Enter Type" box.  The name will be one of the all caps names from the custom_slots.txt, e.g., LIGHTS or ATTRIBUTE. Then paste in the values (they appear just below that all caps name in the custom_slots.txt), one value per line, in the "Enter Values" box. Then click  "OK."  In the end you're going to create 7 different custom slots. 
+8. Copy/paste the contents of intent_schema.txt into the "Intent Schema" box.
+9. Copy/paste the contents of utterance_samples.txt into the "Sample Utterances" box.
 
-Now, for the custom slot values "LIGHTS" and "SCENES" substitute in the appropriate values for your lights and scenes. For lights, single bulbs should be indicated by 'light' (e.g, "kitchen light") and groups with 'lights' (e.g., "living room lights.) 
+Now, for the custom slot values "LIGHTS" and "SCENES" substitute in the appropriate values for your lights and scenes. 
+
+**IMPORTANT NOTE:** When filling in the LIGHTS custom slot, single bulbs should be indicated by 'light' (e.g, "kitchen light") and groups with 'lights' (e.g., "living room lights.) This means that you *don't* want the actual name of your lights to be something like "Kitchen lights" or "Bedroom light," because then you'll have to say things like "Turn on the kitchen lights lights!" The name of the group/lights should just be "Kitchen" or "bedroom," and in the LIGHTS custom slot you'll enter "Kitchen lights" or "Bedroom light."
 
 ######Creating the Lambda Function
 For information on how to set up the Lambda function, look at the instructions [here.](https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/developing-an-alexa-skill-as-a-lambda-function)
@@ -41,11 +43,13 @@ For information on how to set up the Lambda function, look at the instructions [
 When you get to the step that says, "When you are ready to add your own code, edit the function and select the Code tab," you'll be copying and pasting in the text from lambda_passthrough.js. Add your code as Node.js. Just copy and paste lambda_passthrough.js in the code editor.
 
 ######Installing the Server
-There are two ways to set this up. Perhaps the the easiest way to get the server up and running is with a Docker containter. (Thanks to [jpeffer](https://hub.docker.com/r/jpeffer/docker-alexa-hue/) for the work onWindows and OSX! Thanks to [eschizoid](https://github.com/eschizoid) for the RaspberryPi build.) The container includes the correct version of Ruby and everything required to get the server talking to your skill.
+There are two ways to set this up. If you're running the server on Windows or OSX, the easiest way to get up and running is with a Docker containter. (Thanks to [jpeffer](https://hub.docker.com/r/jpeffer/docker-alexa-hue/) for the work on Windows and OSX! The container includes the correct version of Ruby and everything required to get the server talking to your skill.
 
-*You can also set everything else manually, skipping the Docker installation. I've written some instructions for doing that [here](server_installation.md).*
+If you have a Raspberry Pi 3, you can  still use Docker, though there are a few additional steps required to get Docker running on a Pi 3. Thanks to [eschizoid](https://github.com/eschizoid) for the RaspberryPi build of Alexa Hue, and for the startup script.)
 
-Docker Setup
+*You can also set up everything manually, skipping the Docker installation. (This is the only installation method available on Raspberry Pi 2 or earlier, and it still might be easier than using Docker on a Pi 3.) I've written some instructions for doing that [here](server_installation.md).*
+
+Docker Setup (for OSX, Windows, and Pi 3)
 
 Install the correct version of [Docker Toolbox](https://www.docker.com/products/docker-toolbox) for your OS.
 
@@ -53,29 +57,18 @@ Install the correct version of [Docker Toolbox](https://www.docker.com/products/
 
 -- Select "Yes" if prompted to install additional drivers.
 
-Open Docker Quickstart Terminal
+If you're installing Docker on a Rapsberry Pi 3, look at the instructions [here](http://blog.hypriot.com/post/run-docker-rpi3-with-wifi/). 
+Assuming you've got a copy of Raspbian Jessie running on your Pi, scroll down to the instructions in the **Installing Docker** section. That's all you need to worry about.
 
--- Again, select "Yes" if prompted
+Now that Docker is installed, just open the Docker Quickstart Terminal (again, select "Yes" if prompted), and run a command of the following form in the Docker terminal. 
 
-Run the following two commands in the Docker CLI terminal. On Windows and OSX, first run:
+````bash start.sh <timezone> <win|mac|pi>````
 
-````docker run -e "TZ=America/New_York" -itdP --name=docker-alexa-hue sarkonovich/docker-alexa-hue````
+Supply the timezone and platform paratmeters that you want to use. (There's a list of time zone codes at the end of this readme.) So, if you're running your server on OSX, and your timezone is PDT, your command will look like:
 
-In case you are using a RaspberryPi (armhf), run the following command:
+````bash start.sh "America/Los_Angeles" mac````
 
-````docker run -e "TZ=America/New_York" -itdP --name=docker-alexa-hue eschizoid/docker-alexa-hue-armhf````
-
-(You'll have to replace the TZ parameter with the appropriate value. There's a partial list of US TZ names at the bottom of this Readme.)
-
-Then (Windows and OSX):
-
-````docker run --rm -it --link docker-alexa-hue wernight/ngrok ngrok http docker-alexa-hue:4567````
-
-Again, the equivalent command for a RaspberryPi would be:
-
-````docker run --rm -it --link docker-alexa-hue eschizoid/docker-ngrok-armhf ngrok http docker-alexa-hue:4567````
-
-You should be looking at something like this, which is the public IP address of the tunnel to your local server.
+If all goes well, you should end up looking at a screen with information like this on it:
 
 ````Forwarding  http://2a52d01e.ngrok.io -> docker-alexa-hue:4567````
 
@@ -128,7 +121,7 @@ At this point the skill should be available to you. You can say things like:
 
 *"Alexa, tell...start long alert on the kitchen lights in forty five seconds"*
 
-Preprogrammed colors include pink, orange, green, red, turqoise, blue, purple, and violet. All these colors accept the modifiers "dark" and "light" (e.g., "dark blue", "light pink."). You can also specify the following mired colors: candle, relax, reading, neutral, concentrate, and energize. You can add your own colors, or adjust the values of the existing ones, by editing lines 254 and 255 of hue.switch.rb
+Preprogrammed colors include pink, orange, green, red, turqoise, blue, purple, and violet. All these colors accept the modifiers "dark" and "light" (e.g., "dark blue", "light pink."). You can also specify the following mired colors: candle, relax, reading, neutral, concentrate, and energize.
 
 ####Groups and Scenes####
 
