@@ -43,7 +43,9 @@ For information on how to set up the Lambda function, look at the instructions [
 When you get to the step that says, "When you are ready to add your own code, edit the function and select the Code tab," you'll be copying and pasting in the text from lambda_passthrough.js. Add your code as Node.js. Just copy and paste lambda_passthrough.js in the code editor.
 
 ######Installing the Server
-There are two ways to set this up. If you're running the server on Windows or OSX, the easiest way to get up and running is with a Docker containter. (Thanks to [jpeffer](https://hub.docker.com/r/jpeffer/docker-alexa-hue/) for the work on Windows and OSX! The container includes the correct version of Ruby and everything required to get the server talking to your skill.
+First, [download the .zip file](https://github.com/sarkonovich/Alexa-Hue/archive/master.zip) of this repo, and unzip it in a folder that's easy to get to.
+
+There are two ways to set the server up. If you're running the server on Windows or OSX, the easiest way to get up and running is with a Docker containter. (Thanks to [jpeffer](https://hub.docker.com/r/jpeffer/docker-alexa-hue/) for the work on Windows and OSX! The container includes the correct version of Ruby and everything required to get the server talking to your skill.
 
 If you have a Raspberry Pi 3, you can  still use Docker, though there are a few additional steps required to get Docker running on a Pi 3. Thanks to [eschizoid](https://github.com/eschizoid) for the RaspberryPi build of Alexa Hue, and for the startup script.)
 
@@ -51,16 +53,18 @@ If you have a Raspberry Pi 3, you can  still use Docker, though there are a few 
 
 Docker Setup (for OSX, Windows, and Pi 3)
 
-Install the correct version of [Docker Toolbox](https://www.docker.com/products/docker-toolbox) for your OS.
+For *Windows and OSX*, install the correct version of [Docker Toolbox](https://www.docker.com/products/docker-toolbox) for your OS.
 
 -- The default installation settings most likely adequate.
 
 -- Select "Yes" if prompted to install additional drivers.
 
-If you're installing Docker on a Rapsberry Pi 3, look at the instructions [here](http://blog.hypriot.com/post/run-docker-rpi3-with-wifi/). 
+*If you're installing Docker on a Rapsberry Pi 3*, look at the instructions [here](http://blog.hypriot.com/post/run-docker-rpi3-with-wifi/). 
 Assuming you've got a copy of Raspbian Jessie running on your Pi, scroll down to the instructions in the **Installing Docker** section. That's all you need to worry about.
 
-Now that Docker is installed, just open the Docker Quickstart Terminal (again, select "Yes" if prompted), and run a command of the following form in the Docker terminal. 
+Once you've got Docker properly installed:
+
+On Windows or OSX, open the Docker Quickstart Terminal (again, select "Yes" if prompted). On a Pi 3, open a terminal window in the folder where you unzipped the repo contents. Now, run a command of the following form: 
 
 ````bash start.sh <timezone> <win|mac|pi>````
 
