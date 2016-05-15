@@ -9,13 +9,25 @@ Demo here: https://youtu.be/JBZlaAQtOXQ
 Since Amazon does not give 3rd party developers a way to access your local network, we need a bit of a workaround. This skill has three components:
 
 
-1. An Alexa "skill" that you set up in the Amazon Developer's portal.
-2. An Amazon Alexa Lambda function -- thanks to [Matt Kruse](https://forums.developer.amazon.com/forums/profile.jspa?userID=13686) -- on AWS that just passes your skill requests onto...
+1. An Amazon Alexa Lambda function -- thanks to [Matt Kruse](https://forums.developer.amazon.com/forums/profile.jspa?userID=13686) -- on AWS that just receives requests from....
+2. An Alexa "skill" that you set up in the Amazon Developer's portal and passes commands onto...
 3. A server on your local network that does have access your Hue Bridge.
 
 *Please note that Alexa-Hue requires a server running all the time (or all the time you want to control your lights with Alexa.)*
 
 To set up the skill and deploy the Lambda function, you'll need to set up a developer account at the [developer portal.](https://developer.amazon.com/home.html)
+
+
+######Creating the Lambda Function
+For information on how to set up the Lambda function, look at the tutorial [here.](https://developer.amazon.com/public/community/post/TxDJWS16KUPVKO/New-Alexa-Skills-Kit-Template-Build-a-Trivia-Skill-in-under-an-Hour)
+
+If you've already set up your developer account above, you can skip to Step. #2 in the tutorial
+
+When you get to the step 5, you'll be copying and pasting in the text from lambda_passthrough.js. Add your code as Node.js. Just copy and paste lambda_passthrough.js in the code editor.
+
+Continue through step 12.
+
+When you Step #3, follow the instructions under 1. and 2. to setmup a new skill. Then follow my instructions below (though the pictures in step #3 of the tutorial are relevant and might still be helpful.)
 
 ######Creating the Skill
 
@@ -35,14 +47,8 @@ Now, for the custom slot values "LIGHTS" and "SCENES" substitute in the appropri
 
 **IMPORTANT NOTE:** When filling in the LIGHTS custom slot, single bulbs should be indicated by 'light' (e.g, "kitchen light") and groups with 'lights' (e.g., "living room lights.) This means that you *don't* want the actual name of your lights to be something like "Kitchen lights" or "Bedroom light," because then you'll have to say things like "Turn on the kitchen lights lights!" The name of the group/lights should just be "Kitchen" or "bedroom," and in the LIGHTS custom slot you'll enter "Kitchen lights" or "Bedroom light."
 
-######Creating the Lambda Function
-For information on how to set up the Lambda function, look at the instructions [here.](https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/developing-an-alexa-skill-as-a-lambda-function)
-
-(In particular, follow the steps under "Creating a Lambda Function for an Alexa Skill")
-
-When you get to the step that says, "When you are ready to add your own code, edit the function and select the Code tab," you'll be copying and pasting in the text from lambda_passthrough.js. Add your code as Node.js. Just copy and paste lambda_passthrough.js in the code editor.
-
 ######Installing the Server
+Okay, now we're done with the "cloud" side of things. We need to set things up on your local network.
 First, [download the .zip file](https://github.com/sarkonovich/Alexa-Hue/archive/master.zip) of this repo, and unzip it in a folder that's easy to get to.
 
 There are two ways to set the server up. If you're running the server on Windows or OSX, the easiest way to get up and running is with a Docker containter. (Thanks to [jpeffer](https://hub.docker.com/r/jpeffer/docker-alexa-hue/) for the work on Windows and OSX! The container includes the correct version of Ruby and everything required to get the server talking to your skill.
@@ -77,6 +83,8 @@ If all goes well, you should end up looking at a screen with information like th
 ````Forwarding  http://2a52d01e.ngrok.io -> docker-alexa-hue:4567````
 
 ````Forwarding  https://2a52d01e.ngrok.io -> docker-alexa-hue:4567````
+
+(If all doesn't go well, and you get an error like: "Unable to connect to Docker Daemon", try ````sudo bash start.sh <timezone> <win|mac|pi>````
 
 Head back to the lambda function on aws and replace the application_id and url with the application_id of your skill (found in the developer portal) and the ip address of your server (e.g., the ip address of your ngrok tunnel.) So, line 9 (or so) of the Lambda function might look something like this:
 
