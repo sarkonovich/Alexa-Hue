@@ -15,19 +15,18 @@ Since Amazon does not give 3rd party developers a way to access your local netwo
 
 *Please note that Alexa-Hue requires a server running all the time (or all the time you want to control your lights with Alexa.)*
 
-To set up the skill and deploy the Lambda function, you'll need to set up a developer account at the [developer portal.](https://developer.amazon.com/home.html)
-
+First, [download the .zip file](https://github.com/sarkonovich/Alexa-Hue/archive/master.zip) of this repo, and unzip it in a folder that's easy to get to.
 
 ######Creating the Lambda Function
 For information on how to set up the Lambda function, look at the tutorial [here.](https://developer.amazon.com/public/community/post/TxDJWS16KUPVKO/New-Alexa-Skills-Kit-Template-Build-a-Trivia-Skill-in-under-an-Hour)
 
-If you've already set up your developer account above, you can skip to Step. #2 in the tutorial
+Set up your developer account by following step #1. Then go through the instructions under step #2.
 
-When you get to the step 5, you'll be copying and pasting in the text from lambda_passthrough.js. Add your code as Node.js. Just copy and paste lambda_passthrough.js in the code editor.
+When you get to Step #2 5., you'll be copying and pasting in the text from lambda_passthrough.js that you downloaded from the repo. (Remember, it's in that easy to get to folder.) Add your code as Node.js. Just copy and paste lambda_passthrough.js in the code editor.
 
-Continue through step 12.
+Continue through Step #2 12.
 
-When you Step #3, follow the instructions under 1. and 2. to setmup a new skill. Then follow my instructions below (though the pictures in step #3 of the tutorial are relevant and might still be helpful.)
+When you Step #3, follow the instructions under 1. and 2. to set up a new skill. Then follow my instructions below (though the pictures in Step #3 of the tutorial are relevant and might still be helpful.)
 
 ######Creating the Skill
 
@@ -49,7 +48,6 @@ Now, for the custom slot values "LIGHTS" and "SCENES" substitute in the appropri
 
 ######Installing the Server
 Okay, now we're done with the "cloud" side of things. We need to set things up on your local network.
-First, [download the .zip file](https://github.com/sarkonovich/Alexa-Hue/archive/master.zip) of this repo, and unzip it in a folder that's easy to get to.
 
 There are two ways to set the server up. If you're running the server on Windows or OSX, the easiest way to get up and running is with a Docker containter. (Thanks to [jpeffer](https://hub.docker.com/r/jpeffer/docker-alexa-hue/) for the work on Windows and OSX! The container includes the correct version of Ruby and everything required to get the server talking to your skill.
 
