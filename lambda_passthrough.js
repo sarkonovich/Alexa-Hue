@@ -6,7 +6,7 @@ exports.handler = function (json, context) {
         // A list of URL's to call for each applicationId
         var handlers = {
             'appId':'url',
-            'amzn1.echo-sdk-ams.app.xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx':' http://xxxxxxxx.ngrok.io/lights'
+            'amzn1.echo-sdk-ams.app.xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx':'http://xxxxxxxx.ngrok.io/lights'
         };
         
         // Look up the url to call based on the appId
