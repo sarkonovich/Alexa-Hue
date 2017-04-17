@@ -1,4 +1,4 @@
-####Alexa-Hue Server Installation####
+#### Alexa-Hue Server Installation ####
 
 
 
@@ -39,7 +39,7 @@ to avoid it! Finally,
 
 to start the server on port 4567.
 
-######Troubleshooting######
+###### Troubleshooting ######
 
 Here are some possible errors you might get at this point
 
