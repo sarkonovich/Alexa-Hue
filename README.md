@@ -1,6 +1,6 @@
-##Alexa Hue##
+## Alexa Hue ##
 
-###Control Hue Lights with Alexa###
+### Control Hue Lights with Alexa ###
 
 Well, you already can turn them on and off and dim them with Alexa. But this Alexa program gives you much more control: change colors, recall scenes, save scenes, set timers, turn on dynamic effects (color loops and alerts) and, of course, turn them on and off and dim them.
 
@@ -17,7 +17,7 @@ Since Amazon does not give 3rd party developers a way to access your local netwo
 
 First, [download the .zip file](https://github.com/sarkonovich/Alexa-Hue/archive/master.zip) of this repo, and unzip it in a folder that's easy to get to.
 
-######Creating the Lambda Function
+###### Creating the Lambda Function
 For information on how to set up the Lambda function, look at the tutorial [here.](https://developer.amazon.com/public/community/post/TxDJWS16KUPVKO/New-Alexa-Skills-Kit-Template-Build-a-Trivia-Skill-in-under-an-Hour)
 
 Set up your developer account by following step #1. Then go through the instructions under step #2.
@@ -28,7 +28,7 @@ Continue through Step #2 12.
 
 When you Step #3, follow the instructions under 1. and 2. to set up a new skill. Then follow my instructions below (though the pictures in Step #3 of the tutorial are relevant and might still be helpful.)
 
-######Creating the Skill
+###### Creating the Skill
 
 To create your new skill, go to the [Amazon developer portal](https://developer.amazon.com/edw/home.html#/skills), and click on the "Add New Skill" button, up there in the top right.
 
@@ -46,7 +46,7 @@ Now, for the custom slot values "LIGHTS" and "SCENES" substitute in the appropri
 
 **IMPORTANT NOTE:** When filling in the LIGHTS custom slot, single bulbs should be indicated by 'light' (e.g, "kitchen light") and groups with 'lights' (e.g., "living room lights.) This means that you *don't* want the actual name of your lights to be something like "Kitchen lights" or "Bedroom light," because then you'll have to say things like "Turn on the kitchen lights lights!" The name of the group/lights should just be "Kitchen" or "bedroom," and in the LIGHTS custom slot you'll enter "Kitchen lights" or "Bedroom light."
 
-######Installing the Server
+###### Installing the Server
 Okay, now we're done with the "cloud" side of things. We need to set things up on your local network.
 
 There are two ways to set the server up. If you're running the server on Windows or OSX, the easiest way to get up and running is with a Docker containter. (Thanks to [jpeffer](https://hub.docker.com/r/jpeffer/docker-alexa-hue/) for the work on Windows and OSX! The container includes the correct version of Ruby and everything required to get the server talking to your skill.
